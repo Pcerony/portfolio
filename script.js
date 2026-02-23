@@ -222,35 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Lightbox Functionality
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const galleryImages = document.querySelectorAll('.work-images-grid-scroll img');
-
-    if (lightbox && lightboxImg) {
-        galleryImages.forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
-                lightbox.classList.add('active');
-            });
-        });
-
-        const closeLightbox = () => {
-            lightbox.classList.remove('active');
-        };
-
-        lightbox.addEventListener('click', () => {
-            closeLightbox();
-        });
-
-        // Close on Esc key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                closeLightbox();
-            }
-        });
-    }
-
     // Reveal Animations on Scroll
     const revealElements = document.querySelectorAll('.reveal, .reveal-item');
     const revealOnLoad = document.querySelectorAll('.reveal-on-load');
