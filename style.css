@@ -522,8 +522,10 @@ a {
 }
 
 .lightbox-img {
-  width: 80vw;
-  height: 80vh;
+  max-width: 60vw;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
   object-fit: contain;
   transform: scale(0.95);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -532,8 +534,8 @@ a {
 
 @media (max-width: 768px) {
   .lightbox-img {
-    width: 85vw;
-    height: 75vh;
+    max-width: 90vw;
+    max-height: 80vh;
   }
 }
 
@@ -546,5 +548,9 @@ a {
   height: 100%;
   object-fit: cover;
   /* Keeps image filling the square grid */
+}
+
+/* Only target Other Works gallery for zoom interactions */
+.work-images-grid-scroll .work-image img {
   cursor: zoom-in;
 }
