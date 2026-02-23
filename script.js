@@ -385,15 +385,19 @@ document.addEventListener('DOMContentLoaded', () => {
             drawWaveGroup(topGroupBaseY, 1);
 
             // Group 2: The new wave group emerging from the bottom
-            // Appears when scrolling deep into the page (e.g. past typical fold)
-            // It will rise up from the bottom as you scroll further.
-            const documentHeight = document.body.scrollHeight;
-            const scrollRatio = currentScroll / (documentHeight - window.innerHeight);
-            // It starts way below the screen, and moves up. We multiply currentScroll by 0.5 to make it appear faster
-            const bottomGroupBaseY = (height * 1.5) - (currentScroll * 0.4);
+            const hobbiesSection = document.getElementById('hobbies');
+            let bottomGroupBaseY = height * 2; // Default to hidden off-screen
+
+            if (hobbiesSection) {
+                const rect = hobbiesSection.getBoundingClientRect();
+                // We map this section's relative viewport position to the wave's Y.
+                // When hobbies is at bottom of screen (rect.top == height), wave is at bottom edge (height).
+                // When hobbies is at top of screen (rect.top == 0), wave is in lower mid screen (height * 0.7).
+                bottomGroupBaseY = (height * 0.7) + (rect.top * 0.3);
+            }
 
             // Only draw second group if it's remotely close to or inside the viewport to save GPU
-            if (bottomGroupBaseY < height + 400) {
+            if (bottomGroupBaseY > -400 && bottomGroupBaseY < height + 400) {
                 // Opacity fades in as it enters
                 const entranceOpacity = Math.min(1, Math.max(0, (height + 200 - bottomGroupBaseY) / 400));
                 drawWaveGroup(bottomGroupBaseY, entranceOpacity);
