@@ -392,8 +392,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rect = hobbiesSection.getBoundingClientRect();
                 // We map this section's relative viewport position to the wave's Y.
                 // When hobbies is at bottom of screen (rect.top == height), wave is at bottom edge (height).
-                // When hobbies is at top of screen (rect.top == 0), wave is in lower mid screen (height * 0.7).
-                bottomGroupBaseY = (height * 0.7) + (rect.top * 0.3);
+                // Use a steeper multiplier (0.6) so it rises much faster, and target a higher resting point (height * 0.4).
+                bottomGroupBaseY = (height * 0.45) + (rect.top * 0.55);
             }
 
             // Only draw second group if it's remotely close to or inside the viewport to save GPU
