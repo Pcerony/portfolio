@@ -227,12 +227,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealOnLoad = document.querySelectorAll('.reveal-on-load');
 
     // Trigger initial load animations
-    setTimeout(() => {
-        revealOnLoad.forEach(el => el.classList.add('visible'));
+    setLanguage('en');
 
-        // Initialize translations
-        setLanguage('en');
-    }, 100);
+    setTimeout(() => {
+        const bgCanvas = document.getElementById('bg-canvas');
+        if (bgCanvas) {
+            bgCanvas.classList.remove('zoomed-intro');
+        }
+
+        // Wait for the red line wave to shrink before revealing texts
+        setTimeout(() => {
+            revealOnLoad.forEach(el => el.classList.add('visible'));
+        }, 1200);
+
+    }, 50);
 
     // Days in Japan Counter Logic
     let counterStarted = false;

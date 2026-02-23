@@ -58,8 +58,14 @@ body {
   height: 100vh;
   z-index: -1;
   pointer-events: none;
+  transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.8s ease;
+  transform-origin: center center;
   /* Ignore clicks so it doesn't block the UI */
   background: var(--color-bg);
+}
+
+#bg-canvas.zoomed-intro {
+  transform: scale(30);
 }
 
 .text-light-gray {
