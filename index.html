@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>HEISEI'S PAGE</title>
+    <!-- Favicon (Red Knot Logo) -->
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Canvas Dynamic Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Top Nav / Language Switcher -->
+    <header class="navbar">
+        <div class="logo"></div>
+        <div class="lang-switcher">
+            <span class="lang-btn active" data-lang="en">EN</span>
+            <span class="lang-btn" data-lang="zh">中</span>
+            <span class="lang-btn" data-lang="ja">JP</span>
+        </div>
+    </header>
+
+    <!-- Content Sections -->
+    <main>
+        <!-- 1. Cover -->
+        <section id="cover" class="section fill-height flex-center">
+            <div class="container text-center reveal-on-load">
+                <h1 class="font-light tracking-wide text-white cover-name">HEISEI</h1>
+                <p class="font-regular text-gray mt-4" data-i18n="cover_title">Product Designer</p>
+            </div>
+        </section>
+
+        <!-- 2. About -->
+        <section id="about" class="section pt-section pb-section">
+            <div class="container reveal">
+                <p class="section-label text-dark-gray" data-i18n="nav_about">About</p>
+                <h2 class="section-title text-light-gray leading-relaxed mt-4" data-i18n="about_text">
+                    My focus lies in discovering the 'leverage points' hidden within user experiences, using minimal
+                    effort to drive maximum impact.
+                </h2>
+
+                <div class="about-info border-top pt-4"
+                    style="margin-top: 2.5rem; border-top: 1px solid var(--color-border); padding-top: 2rem; display: flex; flex-wrap: wrap; gap: 2.5rem;">
+                    <p class="text-white font-medium text-sm" data-i18n="info_role_val">Born in Anhui, China</p>
+                    <p class="text-white font-medium text-sm" data-i18n="info_edu_val">Based in Fukuoka, Japan</p>
+                    <p class="text-white font-medium text-sm" data-i18n="info_nat_val">M.A. Candidate at Kyushu
+                        University</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2.5 Experience -->
+        <section id="experience" class="section pt-section pb-section">
+            <div class="container reveal">
+                <p class="section-label text-dark-gray mb-8" data-i18n="experience_title">Experience</p>
+
+                <div class="experience-list">
+                    <div class="experience-item">
+                        <div class="text-gray text-sm font-medium" data-i18n="exp_1_year">2023 - Present</div>
+                        <div>
+                            <p class="text-white font-medium text-base mb-1" data-i18n="exp_1_org">Kyushu University</p>
+                            <p class="text-dark-gray text-sm" data-i18n="exp_1_role">M.A. Researcher in Product Design
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="text-gray text-sm font-medium" data-i18n="exp_2_year">2021 - 2023</div>
+                        <div>
+                            <p class="text-white font-medium text-base mb-1" data-i18n="exp_2_org">Freelance</p>
+                            <p class="text-dark-gray text-sm" data-i18n="exp_2_role">Independent Digital Designer</p>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="text-gray text-sm font-medium" data-i18n="exp_3_year">2017 - 2021</div>
+                        <div>
+                            <p class="text-white font-medium text-base mb-1" data-i18n="exp_3_org">Tech Startup</p>
+                            <p class="text-dark-gray text-sm" data-i18n="exp_3_role">UI/UX Designer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Portfolio -->
+        <section id="portfolio" class="section pt-section pb-section">
+            <div class="container">
+                <p class="section-label text-dark-gray mb-8" data-i18n="portfolio_title">Recent Works</p>
+
+                <div class="portfolio-grid">
+                    <!-- Work Item 1 -->
+                    <div class="work-item">
+                        <div class="work-images-scroll">
+                            <div class="work-image bg-gray placeholder-image">
+                                <img src="./images/work1/01.png" alt="作品1图1">
+                            </div>
+                            <div class="work-image bg-dark-gray placeholder-image">
+                                <img src="./images/work1/02.png" alt="作品1图2">
+                            </div>
+                            <div class="work-image bg-medium-gray placeholder-image">
+                                <img src="./images/work1/03.png" alt="作品1图3">
+                            </div>
+                        </div>
+                        <div class="work-info mt-4">
+                            <h3 class="font-medium text-white text-lg" data-i18n="work_1_title">OVO_AI Hardware Design
+                            </h3>
+                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
+                                data-i18n="work_1_sub">2024 / PRODUCT DESIGN</p>
+                            <p class="font-light text-gray mt-2 text-sm" data-i18n="work_1_desc">A shoulder-mounted AI
+                                work assistant that allows ultra-low voice interaction to protect privacy.</p>
+                        </div>
+                    </div>
+
+                    <!-- Work Item 2 -->
+                    <div class="work-item">
+                        <div class="work-images-scroll">
+                            <div class="work-image bg-gray placeholder-image">
+                                <img src="./images/work2/01.png" alt="作品2图1">
+                            </div>
+                            <div class="work-image bg-dark-gray placeholder-image">
+                                <img src="./images/work2/02.png" alt="作品2图2">
+                            </div>
+                            <div class="work-image bg-medium-gray placeholder-image">
+                                <img src="./images/work2/03.png" alt="作品2图3">
+                            </div>
+                        </div>
+                        <div class="work-info mt-4">
+                            <h3 class="font-medium text-white text-lg" data-i18n="work_2_title">MUSH_Slanted-Pillar
+                                Dredger</h3>
+                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
+                                data-i18n="work_2_sub">2023 / INDUSTRIAL DESIGN</p>
+                            <p class="font-light text-gray mt-2 text-sm" data-i18n="work_2_desc">Utilizes an innovative
+                                comparative stilt structure to achieve flexible mobile dredging in complex water areas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Work Item 3 -->
+                    <div class="work-item">
+                        <div class="work-images-scroll">
+                            <div class="work-image bg-medium-gray placeholder-image">
+                                <img src="./images/work3/01.png" alt="作品3图1">
+                            </div>
+                            <div class="work-image bg-gray placeholder-image">
+                                <img src="./images/work3/02.png" alt="作品3图2">
+                            </div>
+                            <div class="work-image bg-dark-gray placeholder-image">
+                                <img src="./images/work3/03.png" alt="作品3图3">
+                            </div>
+                        </div>
+                        <div class="work-info mt-4">
+                            <h3 class="font-medium text-white text-lg" data-i18n="work_3_title">MA_Linked Vehicle Design
+                            </h3>
+                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
+                                data-i18n="work_3_sub">2022 / TRANSPORTATION DESIGN</p>
+                            <p class="font-light text-gray mt-2 text-sm" data-i18n="work_3_desc">Simulates a clip-like
+                                linking mechanism to enable the towing and connection of multiple utility vehicles.</p>
+                        </div>
+                    </div>
+
+                    <!-- Work Item 4 (Other Works Mini Gallery) -->
+                    <div class="work-item">
+                        <div class="work-images-grid-scroll">
+                            <!-- Column 1 -->
+                            <div class="work-image bg-dark-gray placeholder-image">
+                                <img src="./images/other/01.png" alt="Other Work 1">
+                            </div>
+                            <div class="work-image bg-medium-gray placeholder-image">
+                                <img src="./images/other/02.png" alt="Other Work 2">
+                            </div>
+                            <div class="work-image bg-gray placeholder-image">
+                                <img src="./images/other/03.png" alt="Other Work 3">
+                            </div>
+                            <!-- Column 2 -->
+                            <div class="work-image bg-dark-gray placeholder-image">
+                                <img src="./images/other/04.png" alt="Other Work 4">
+                            </div>
+                            <div class="work-image bg-medium-gray placeholder-image">
+                                <img src="./images/other/05.png" alt="Other Work 5">
+                            </div>
+                            <div class="work-image bg-gray placeholder-image">
+                                <img src="./images/other/06.png" alt="Other Work 6">
+                            </div>
+                            <!-- Column 3 -->
+                            <div class="work-image bg-dark-gray placeholder-image">
+                                <img src="./images/other/07.png" alt="Other Work 7">
+                            </div>
+                            <div class="work-image bg-medium-gray placeholder-image">
+                                <img src="./images/other/08.png" alt="Other Work 8">
+                            </div>
+                            <div class="work-image bg-gray placeholder-image">
+                                <img src="./images/other/09.png" alt="Other Work 9">
+                            </div>
+                            <!-- Column 4 -->
+                            <div class="work-image bg-dark-gray placeholder-image">
+                                <img src="./images/other/10.png" alt="Other Work 10">
+                            </div>
+                            <div class="work-image bg-medium-gray placeholder-image">
+                                <img src="./images/other/11.png" alt="Other Work 11">
+                            </div>
+                            <div class="work-image bg-gray placeholder-image">
+                                <img src="./images/other/12.png" alt="Other Work 12">
+                            </div>
+                            <!-- Column 5 -->
+                            <div class="work-image bg-dark-gray placeholder-image">
+                                <img src="./images/other/13.png" alt="Other Work 13">
+                            </div>
+                            <div class="work-image bg-medium-gray placeholder-image">
+                                <img src="./images/other/14.png" alt="Other Work 14">
+                            </div>
+                            <div class="work-image bg-gray placeholder-image">
+                                <img src="./images/other/15.png" alt="Other Work 15">
+                            </div>
+                            <!-- Column 6 -->
+                            <div class="work-image bg-dark-gray placeholder-image">
+                                <img src="./images/other/16.png" alt="Other Work 16">
+                            </div>
+                            <div class="work-image bg-medium-gray placeholder-image">
+                                <img src="./images/other/17.png" alt="Other Work 17">
+                            </div>
+                            <div class="work-image bg-gray placeholder-image">
+                                <img src="./images/other/18.png" alt="Other Work 18">
+                            </div>
+                        </div>
+                        <div class="work-info mt-4">
+                            <h3 class="font-medium text-white text-lg" data-i18n="work_4_title">Other Works</h3>
+                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
+                                data-i18n="work_4_sub">VARIOUS / DESIGN EXPLORATIONS</p>
+                            <p class="font-light text-gray mt-2 text-sm" data-i18n="work_4_desc">Selected rapid
+                                prototypes, graphic experiments, and side projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3.5 Research -->
+        <section id="research" class="section pt-section pb-section">
+            <div class="container reveal">
+                <p class="section-label text-dark-gray mb-8" data-i18n="nav_research">Research</p>
+
+                <!-- Master Research Hero Intro -->
+                <div class="research-main reveal-item mb-12">
+                    <div class="research-main-image bg-medium-gray mb-8"
+                        style="aspect-ratio: 16/9; width: 100%; background-image: url('./images/research/R0.png'); background-size: cover; background-position: center;">
+                    </div>
+
+                    <h3 class="font-medium text-white text-xl" data-i18n="research_main_title">Master's Research
+                        Overview</h3>
+                    <p class="text-xs text-dark-gray uppercase tracking-widest mt-2 mb-2 font-medium"
+                        data-i18n="research_main_sub">2024 - 2025 / KYUSHU UNIVERSITY</p>
+                    <p class="font-light text-gray mt-2 text-md leading-relaxed" data-i18n="research_main_desc">A
+                        comprehensive exploration of co-creation tools designed for interpretive signage, focusing on
+                        collaborative design methodologies.</p>
+                </div>
+
+                <div class="research-list" style="display: flex; flex-direction: column; gap: 2.5rem;">
+                    <a href="https://pcerony.github.io/signage-annotator/" class="research-item hover-opacity group"
+                        style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; text-decoration: none;">
+                        <div class="research-thumb bg-dark-gray"
+                            style="width: 80px; height: 80px; flex-shrink: 0; background-color: #1a1a1a; background-image: url('./images/research/R1.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="research-text">
+                            <h3 class="font-medium text-white text-lg" data-i18n="research_1_title">Master's Thesis:
+                                Minimalist Interfaces</h3>
+                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
+                                data-i18n="research_1_sub">2024 / THESIS PROJECT</p>
+                            <p class="font-light text-gray mt-2 text-sm leading-relaxed" data-i18n="research_1_desc">A
+                                comprehensive study on how extreme minimalism affects cognitive load and task completion
+                                times in professional software tools.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://eyetracktool-fluxsyak.manus.space/" class="research-item hover-opacity group"
+                        style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; text-decoration: none;">
+                        <div class="research-thumb bg-dark-gray"
+                            style="width: 80px; height: 80px; flex-shrink: 0; background-color: #1a1a1a; background-image: url('./images/research/R2.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="research-text">
+                            <h3 class="font-medium text-white text-lg" data-i18n="research_2_title">Publication: The
+                                Aesthetics of Void</h3>
+                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
+                                data-i18n="research_2_sub">2025 / ACADEMIC PUBLICATION</p>
+                            <p class="font-light text-gray mt-2 text-sm leading-relaxed" data-i18n="research_2_desc">
+                                Presented at the International Design Conference, exploring the cultural and
+                                psychological
+                                implications of negative space in digital environments.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.jstage.jst.go.jp/article/designresearch/91/0/91_62/_article/-char/ja"
+                        class="research-item hover-opacity group"
+                        style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; text-decoration: none;">
+                        <div class="research-thumb bg-dark-gray"
+                            style="width: 80px; height: 80px; flex-shrink: 0; background-color: #1a1a1a; background-image: url('./images/research/R3.png'); background-size: cover; background-position: center;">
+                        </div>
+
+                        <div class="research-text">
+                            <h3 class="font-medium text-white text-lg" data-i18n="research_3_title">Publication</h3>
+                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
+                                data-i18n="research_3_sub">2025 / ACADEMIC PUBLICATION</p>
+                            <p class="font-light text-gray mt-2 text-sm leading-relaxed" data-i18n="research_3_desc">
+                                Presented at the International Design Conference.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- 4. Hobbies -->
+            <section id="hobbies" class="section pt-section pb-section" style="margin-top: 4rem;">
+                <div class="container reveal">
+                    <p class="section-label text-dark-gray mb-8" data-i18n="nav_hobbies">Hobbies</p>
+
+                    <!-- Travel Module -->
+                    <div class="hobby-item reveal-item" style="margin-bottom: 3rem;">
+                        <h3 class="font-medium text-white text-xl" data-i18n="hobbies_travel">Travel</h3>
+                        <p class="font-light text-gray mt-2 text-md leading-relaxed mb-6"
+                            data-i18n="hobbies_travel_desc">Counting my exploration days in Japan.</p>
+
+                        <div class="travel-stats"
+                            style="display: flex; gap: 6rem; align-items: flex-end; margin-top: 3rem;">
+                            <div class="stat-box">
+                                <div class="stat-number text-white font-light" id="days-counter"
+                                    style="font-size: 3rem; line-height: 1;">0</div>
+                                <div class="text-xs text-dark-gray uppercase tracking-widest mt-2 font-medium"
+                                    data-i18n="days_label">DAYS IN JAPAN</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number text-white font-light" style="font-size: 3rem; line-height: 1;">
+                                    210</div>
+                                <div class="text-xs text-dark-gray uppercase tracking-widest mt-2 font-medium"
+                                    data-i18n="places_label">LOCATIONS VISITED</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Photography Module -->
+                    <div class="hobby-item reveal-item">
+                        <h3 class="font-medium text-white text-xl" data-i18n="hobbies_photo">Photography</h3>
+                        <p class="font-light text-gray mt-2 text-md leading-relaxed mb-8"
+                            data-i18n="hobbies_photo_desc">Capturing moments of structure and void.</p>
+
+                        <div class="photo-wall">
+                            <div class="photo-item placeholder-image bg-dark-gray"
+                                style="aspect-ratio: 3/4; background-image: url('./images/photography/01.png'); background-size: cover; background-position: center;">
+                            </div>
+                            <div class="photo-item placeholder-image bg-medium-gray"
+                                style="aspect-ratio: 4/3; background-image: url('./images/photography/02.png'); background-size: cover; background-position: center;">
+                            </div>
+                            <div class="photo-item placeholder-image bg-gray"
+                                style="aspect-ratio: 1/1; background-image: url('./images/photography/03.png'); background-size: cover; background-position: center;">
+                            </div>
+                            <div class="photo-item placeholder-image bg-dark-gray"
+                                style="aspect-ratio: 16/9; background-image: url('./images/photography/04.png'); background-size: cover; background-position: center;">
+                            </div>
+                            <div class="photo-item placeholder-image bg-medium-gray"
+                                style="aspect-ratio: 3/4; background-image: url('./images/photography/05.png'); background-size: cover; background-position: center;">
+                            </div>
+                            <div class="photo-item placeholder-image bg-gray"
+                                style="aspect-ratio: 4/5; background-image: url('./images/photography/06.png'); background-size: cover; background-position: center;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Contact -->
+            <section id="contact" class="section pt-section pb-section">
+                <div class="container reveal">
+                    <p class="section-label text-dark-gray mb-8" data-i18n="nav_contact">Contact</p>
+                    <h2 class="text-white text-3xl font-light mb-2" data-i18n="contact_title">Let's connect.</h2>
+                    <p class="text-gray mb-12 font-light" data-i18n="contact_desc">Currently available for freelance
+                        projects.</p>
+
+                    <div class="contact-links block-links">
+                        <div class="contact-row border-top-bottom">
+                            <span class="text-dark-gray text-sm uppercase tracking-wide"
+                                data-i18n="email_label">Email</span>
+                            <a href="mailto:xps9630@gmail.com"
+                                class="text-white font-medium hover-opacity">xps9630@gmail.com</a>
+                        </div>
+                        <div class="contact-row border-bottom flex-column-mobile">
+                            <span class="text-dark-gray text-sm uppercase tracking-wide"
+                                data-i18n="social_label">Social</span>
+                            <div class="social-links">
+                                <a href="https://student.redesigner.jp/students/a92ab48b51dbd0679f70b539cf5154e4"
+                                    class="text-white font-medium hover-opacity">ReDesigner</a>
+                                <a href="https://www.linkedin.com/in/%E5%B9%B3%E6%88%90-%E7%8E%8B-4872352b3/"
+                                    class="text-white font-medium hover-opacity">LinkedIn</a>
+                                <a href="https://www.instagram.com/city_signage"
+                                    class="text-white font-medium hover-opacity">Instagram</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </main>
+
+    <footer class="footer text-center py-8">
+        <p class="text-dark-gray text-xs font-light tracking-wide">&copy; 2026 HEISEI DESIGN. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
