@@ -225,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Lightbox Functionality
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxClose = document.querySelector('.lightbox-close');
     const galleryImages = document.querySelectorAll('.work-images-grid-scroll img');
 
     if (lightbox && lightboxImg) {
@@ -240,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lightbox.classList.remove('active');
         };
 
-        lightboxClose.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => {
             if (e.target !== lightboxImg) {
                 closeLightbox();
