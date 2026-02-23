@@ -522,12 +522,19 @@ a {
 }
 
 .lightbox-img {
-  max-width: 80%;
-  max-height: 80vh;
+  width: 80vw;
+  height: 80vh;
   object-fit: contain;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   transform: scale(0.95);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: zoom-out;
+}
+
+@media (max-width: 768px) {
+  .lightbox-img {
+    width: 85vw;
+    height: 75vh;
+  }
 }
 
 .lightbox.active .lightbox-img {

@@ -239,10 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
             lightbox.classList.remove('active');
         };
 
-        lightbox.addEventListener('click', (e) => {
-            if (e.target !== lightboxImg) {
-                closeLightbox();
-            }
+        lightbox.addEventListener('click', () => {
+            closeLightbox();
         });
 
         // Close on Esc key
