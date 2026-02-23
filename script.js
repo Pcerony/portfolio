@@ -333,52 +333,70 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add extra breathing based on scroll velocity (moves faster/expands slightly when scrolling)
             const dynamicBreathe = breathe + Math.min(scrollVelocity * 0.005, 0.5);
 
-            // Generate multiple wave layers
-            for (let j = 0; j < numWaves; j++) {
-                ctx.save();
-                ctx.beginPath();
+            // Function to draw a wave group at a specific base Y offset
+            const drawWaveGroup = (baseY, opacityMultiplier = 1) => {
+                for (let j = 0; j < numWaves; j++) {
+                    ctx.save();
+                    ctx.beginPath();
 
-                if (j === Math.floor(numWaves / 2)) {
-                    // Add a single red glowing line in the center
-                    ctx.strokeStyle = `rgba(255, 60, 60, 0.9)`;
-                    ctx.shadowColor = `rgba(255, 60, 60, 1)`;
-                    ctx.shadowBlur = 12;
-                    ctx.lineWidth = 1.5;
-                } else {
-                    // Opacity fades smoothly at top and bottom to blend with background
-                    const normalizedJ = j / numWaves;
-                    const opacity = Math.sin(normalizedJ * Math.PI) * 0.05;
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-                }
-
-                // Distribute vertically spanning extra top/bottom to hide edges.
-                // Apply the breathing factor to the spacing so the waves expand and contract vertically slowly.
-                // Apply negative scroll parallax (moves up when scrolling down)
-                let yOffset = (height * -0.2) + j * (height * 1.4 / numWaves) * breathe - (currentScroll * 0.2);
-
-                // Reduce point density for performance with 80 parallel lines
-                for (let i = 0; i <= width; i += 15) {
-                    // Combine multiple sine waves. 
-                    // Crucially, remove 'j' from inside the sine phases so they never intersect!
-                    // Introduce a subtle breathing effect to the amplitude.
-                    const wave1 = Math.sin(i * 0.003 + time * 0.4) * 80 * dynamicBreathe;
-                    const wave2 = Math.sin(i * 0.001 - time * 0.2) * 120 * dynamicBreathe;
-
-                    const x = i;
-                    // Introduce a slight parabolic dip towards the center to make it look like a membrane
-                    const distanceFromCenter = (i - width / 2) / (width / 2);
-                    const dip = distanceFromCenter * distanceFromCenter * 50 * dynamicBreathe;
-
-                    const y = yOffset + wave1 + wave2 + dip;
-
-                    if (i === 0) {
-                        ctx.moveTo(x, y);
+                    if (j === Math.floor(numWaves / 2)) {
+                        // Add a single red glowing line in the center
+                        ctx.strokeStyle = `rgba(255, 60, 60, ${0.9 * opacityMultiplier})`;
+                        ctx.shadowColor = `rgba(255, 60, 60, ${1 * opacityMultiplier})`;
+                        ctx.shadowBlur = 12;
+                        ctx.lineWidth = 1.5;
                     } else {
-                        ctx.lineTo(x, y);
+                        // Opacity fades smoothly at top and bottom to blend with background
+                        // Increased base opacity by turning 0.05 into 0.12 so it's visible on smaller contrast screens
+                        const normalizedJ = j / numWaves;
+                        const opacity = Math.sin(normalizedJ * Math.PI) * 0.12 * opacityMultiplier;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
                     }
+
+                    // Calculate actual Y position for this line
+                    let yOffset = baseY + j * (height * 1.4 / numWaves) * breathe;
+
+                    // Reduce point density for performance with 80 parallel lines
+                    for (let i = 0; i <= width; i += 15) {
+                        const wave1 = Math.sin(i * 0.003 + time * 0.4) * 80 * dynamicBreathe;
+                        const wave2 = Math.sin(i * 0.001 - time * 0.2) * 120 * dynamicBreathe;
+
+                        const x = i;
+                        // Introduce a slight parabolic dip towards the center to make it look like a membrane
+                        const distanceFromCenter = (i - width / 2) / (width / 2);
+                        const dip = distanceFromCenter * distanceFromCenter * 50 * dynamicBreathe;
+
+                        const y = yOffset + wave1 + wave2 + dip;
+
+                        if (i === 0) {
+                            ctx.moveTo(x, y);
+                        } else {
+                            ctx.lineTo(x, y);
+                        }
+                    }
+                    ctx.stroke();
+                    ctx.restore();
                 }
-                ctx.stroke();
-                ctx.restore();
+            };
+
+            // Group 1: The original wave group near the top
+            // Moves slowly upwards as you scroll down
+            const topGroupBaseY = (height * -0.2) - (currentScroll * 0.2);
+            drawWaveGroup(topGroupBaseY, 1);
+
+            // Group 2: The new wave group emerging from the bottom
+            // Appears when scrolling deep into the page (e.g. past typical fold)
+            // It will rise up from the bottom as you scroll further.
+            const documentHeight = document.body.scrollHeight;
+            const scrollRatio = currentScroll / (documentHeight - window.innerHeight);
+            // It starts way below the screen, and moves up. We multiply currentScroll by 0.5 to make it appear faster
+            const bottomGroupBaseY = (height * 1.5) - (currentScroll * 0.4);
+
+            // Only draw second group if it's remotely close to or inside the viewport to save GPU
+            if (bottomGroupBaseY < height + 400) {
+                // Opacity fades in as it enters
+                const entranceOpacity = Math.min(1, Math.max(0, (height + 200 - bottomGroupBaseY) / 400));
+                drawWaveGroup(bottomGroupBaseY, entranceOpacity);
             }
 
             // Time advances faster if scrolling fast
