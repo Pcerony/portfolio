@@ -335,6 +335,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Function to draw a wave group at a specific base Y offset
             const drawWaveGroup = (baseY, opacityMultiplier = 1) => {
+                const isLightMode = document.body.classList.contains('light-mode');
+                const lineRGB = isLightMode ? '0, 0, 0' : '255, 255, 255';
+
                 for (let j = 0; j < numWaves; j++) {
                     ctx.save();
                     ctx.beginPath();
@@ -350,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Increased base opacity by turning 0.05 into 0.12 so it's visible on smaller contrast screens
                         const normalizedJ = j / numWaves;
                         const opacity = Math.sin(normalizedJ * Math.PI) * 0.12 * opacityMultiplier;
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                        ctx.strokeStyle = `rgba(${lineRGB}, ${opacity})`;
                     }
 
                     // Calculate actual Y position for this line
@@ -486,4 +489,47 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, { passive: true });
+
+    // --- Easter Egg: Device Orientation Light Mode ("Blocking Sun" tilt) ---
+    let isTiltLightMode = false;
+
+    function handleOrientation(event) {
+        // beta is the front-to-back tilt in degrees (-180 to 180)
+        // flat on table = 0. standing vertical = ~90. 
+        // tilting screen down facing user (like holding above head) = > 105 or < -45
+        if (event.beta > 105 || event.beta < -45) {
+            if (!isTiltLightMode) {
+                isTiltLightMode = true;
+                document.body.classList.add('light-mode');
+            }
+        } else {
+            if (isTiltLightMode) {
+                isTiltLightMode = false;
+                document.body.classList.remove('light-mode');
+            }
+        }
+    }
+
+    if (typeof window.DeviceOrientationEvent !== 'undefined') {
+        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+            // iOS 13+ Devices: Require user permission triggered by a manual UI interaction.
+            // We politely attach it to the first click/touch interaction anywhere on the body to enable the easter egg.
+            let orientationPermissionGranted = false;
+            document.body.addEventListener('click', () => {
+                if (!orientationPermissionGranted) {
+                    DeviceOrientationEvent.requestPermission()
+                        .then(permissionState => {
+                            if (permissionState === 'granted') {
+                                orientationPermissionGranted = true;
+                                window.addEventListener('deviceorientation', handleOrientation);
+                            }
+                        })
+                        .catch(err => { /* silently ignore if permission denied */ });
+                }
+            }, { once: true });
+        } else {
+            // Non-iOS or older iOS devices that don't need explicit permission
+            window.addEventListener('deviceorientation', handleOrientation);
+        }
+    }
 });
