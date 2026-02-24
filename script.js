@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealOnLoad = document.querySelectorAll('.reveal-on-load');
 
     // Trigger initial load animations
-    setLanguage('en');
+    setLanguage('ja');
 
     setTimeout(() => {
         const bgCanvas = document.getElementById('bg-canvas');
@@ -491,7 +491,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     // --- Easter Egg: Device Orientation Light Mode ("Blocking Sun" tilt) ---
-    let isTiltLightMode = false;
+    // Since default is now light-mode, the Easter egg toggles to DARK mode when held up.
+    let isTiltDarkMode = false;
     let readyToToggle = true; // State flag to prevent rapid toggling
 
     function handleOrientation(event) {
@@ -503,11 +504,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.beta >= 145 && event.beta <= 180) {
             if (readyToToggle) {
                 // Perform the toggle action
-                isTiltLightMode = !isTiltLightMode;
-                if (isTiltLightMode) {
-                    document.body.classList.add('light-mode');
-                } else {
+                isTiltDarkMode = !isTiltDarkMode;
+                if (isTiltDarkMode) {
                     document.body.classList.remove('light-mode');
+                } else {
+                    document.body.classList.add('light-mode');
                 }
                 // Disarm the trigger so it doesn't repeatedly toggle while held in this position
                 readyToToggle = false;
