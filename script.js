@@ -492,21 +492,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Easter Egg: Device Orientation Light Mode ("Blocking Sun" tilt) ---
     let isTiltLightMode = false;
+    let readyToToggle = true; // State flag to prevent rapid toggling
 
     function handleOrientation(event) {
         // beta is the front-to-back tilt in degrees (-180 to 180)
         // flat on table = 0. standing vertical = ~90. 
-        // tilting screen down facing user (like holding above head) = > 105 or < -45
-        if (event.beta > 105 || event.beta < -45) {
-            if (!isTiltLightMode) {
-                isTiltLightMode = true;
-                document.body.classList.add('light-mode');
+        // tilting screen down facing user (like holding above head) = > 145
+
+        // When lifted extremely high (blocking sun): beta between 145 and 180
+        if (event.beta >= 145 && event.beta <= 180) {
+            if (readyToToggle) {
+                // Perform the toggle action
+                isTiltLightMode = !isTiltLightMode;
+                if (isTiltLightMode) {
+                    document.body.classList.add('light-mode');
+                } else {
+                    document.body.classList.remove('light-mode');
+                }
+                // Disarm the trigger so it doesn't repeatedly toggle while held in this position
+                readyToToggle = false;
             }
-        } else {
-            if (isTiltLightMode) {
-                isTiltLightMode = false;
-                document.body.classList.remove('light-mode');
-            }
+        }
+        // Re-arm the trigger when the device is returned to a more normal viewing angle (e.g., < 100)
+        else if (event.beta > 0 && event.beta < 100) {
+            readyToToggle = true;
         }
     }
 
