@@ -181,6 +181,11 @@ const translations = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Responsive Default Theme: Dark on Desktop, Light on Mobile
+    if (window.innerWidth > 768) {
+        document.body.classList.remove('light-mode');
+    }
+
     // Language Switcher Logic
     const langBtns = document.querySelectorAll('.lang-btn');
     const textElements = document.querySelectorAll('[data-i18n]');
