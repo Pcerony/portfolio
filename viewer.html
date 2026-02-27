@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HEISEI'S PAGE | PORTFOLIO VIEWER</title>
+    <!-- Favicon (Red Knot Logo) -->
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Extreme Minimalist Override for Viewer */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            overflow: hidden;
+            /* Prevent body scroll, let PDF engine handle it */
+            font-family: 'Inter', 'Noto Sans JP', 'Noto Sans SC', sans-serif;
+            color: #fff;
+        }
+
+        /* Top Bar Overlay */
+        .viewer-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            box-sizing: border-box;
+            pointer-events: none;
+            /* Let clicks pass through if empty */
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: #888;
+            text-decoration: none;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+            pointer-events: auto;
+            /* Enable clicks on button */
+            padding: 10px 0;
+        }
+
+        .back-btn:hover {
+            color: #fff;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn:hover svg {
+            transform: translateX(-4px);
+        }
+
+        /* PDF Container */
+        .pdf-container {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Loading Spinner */
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #333;
+            border-top-color: #ff3333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Bar with Back Button -->
+    <div class="viewer-header">
+        <a href="index.html" class="back-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span id="back-text">Back to Home</span>
+        </a>
+    </div>
+
+    <!-- Background Loader -->
+    <div class="loader">
+        <div class="spinner"></div>
+        <div style="color: #666; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;">LOADING 60MB
+            PORTFOLIO</div>
+    </div>
+
+    <!-- PDF Embed (Target File Name Must be Replaced) -->
+    <div class="pdf-container">
+        <!-- We use an iframe instead of embed for broader mobile support. It points to a placeholder until the user drops the real PDF -->
+        <iframe src="./dummy_portfolio.pdf#toolbar=0&navpanes=0&scrollbar=0" allowfullscreen></iframe>
+    </div>
+
+    <!-- Simple JS to inherit language preference if passed (Optional Polish) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            const backText = document.getElementById('back-text');
+            if (savedLang === 'zh') {
+                backText.textContent = "返回主页";
+            } else if (savedLang === 'ja') {
+                backText.textContent = "ホームに戻る";
+            }
+        });
+    </script>
+</body>
+
+</html>
