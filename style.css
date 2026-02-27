@@ -528,6 +528,14 @@ a {
   transition-delay: 0.3s;
 }
 
+/* Highlight Effects */
+.text-glow-red {
+  color: #ff3333;
+  text-shadow: 0 0 8px rgba(255, 51, 51, 0.8), 0 0 16px rgba(255, 51, 51, 0.4);
+  font-weight: 500;
+  transition: all 0.5s ease;
+}
+
 /* Embedded Map Styling */
 .gmap-container iframe {
   width: 100%;
