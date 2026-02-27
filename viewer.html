@@ -31,6 +31,7 @@
             font-family: 'Inter', 'Noto Sans JP', 'Noto Sans SC', sans-serif;
             color: #fff;
             user-select: none;
+            overscroll-behavior-x: none;
         }
 
         /* Top Bar Overlay */
@@ -125,16 +126,31 @@
             top: 0;
             left: 0;
             z-index: 10;
+            overflow: hidden;
+        }
+
+        .pdf-canvas-container.mobile-portrait {
+            justify-content: flex-start;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: auto;
+            /* Allow exact jumping with scrollLeft */
         }
 
         canvas {
-            max-width: 100%;
+            max-width: none;
             max-height: 100vh;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
             transition: opacity 0.3s ease;
+            flex-shrink: 0;
         }
 
-        /* Interactive Navigation Areas (Invisible overlay for sides) */
+        .pdf-canvas-container:not(.mobile-portrait) canvas {
+            max-width: 100%;
+        }
+
+        /* Desktop Nav Areas */
         .nav-area {
             position: absolute;
             top: 0;
@@ -190,87 +206,51 @@
             height: 24px;
         }
 
-        /* Rotate Device Prompt Overlay */
-        #rotate-prompt {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
+        /* Mobile Edge Buttons (Appended to scroll areas) */
+        .mobile-edge-btn {
             height: 100vh;
-            background-color: #0c0c0c;
-            z-index: 9999;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            box-sizing: border-box;
-        }
-
-        #rotate-prompt svg {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 24px;
-            stroke: #fff;
-            animation: tilt 2s infinite ease-in-out alternate;
-        }
-
-        @keyframes tilt {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(-90deg);
-            }
-        }
-
-        #rotate-prompt p {
+            width: 80px;
+            flex-shrink: 0;
+            background-color: #080808;
             color: #888;
-            font-size: 0.875rem;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 0.75rem;
             letter-spacing: 0.1em;
-            line-height: 1.6;
-            margin: 0;
+            transition: color 0.3s ease, background 0.3s ease;
         }
 
-        .prompt-title {
-            color: #fff !important;
-            font-size: 1.125rem !important;
-            font-weight: 500;
-            margin-bottom: 12px !important;
-            letter-spacing: 0.05em !important;
+        .mobile-edge-btn.prev {
+            border-right: 1px solid #1a1a1a;
         }
 
-        /* Trigger strictly on portrait phones */
-        @media (max-width: 768px) and (orientation: portrait) {
-            #rotate-prompt {
-                display: flex;
-            }
+        .mobile-edge-btn.next {
+            border-left: 1px solid #1a1a1a;
+        }
 
-            /* Hide the reading UI implicitly to prevent accidental clicks mapping or weird stretching */
-            .viewer-header,
-            .loader,
-            .nav-area,
-            .pdf-canvas-container {
-                display: none !important;
-            }
+        .mobile-edge-btn:active {
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+
+        .mobile-edge-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Make them visible only inside portrait */
+        .pdf-canvas-container.mobile-portrait .mobile-edge-btn {
+            display: flex;
+            /* Can be toggled inline depending on numPages */
         }
     </style>
 </head>
 
 <body>
-    <!-- Rotate Prompt Overlay for Mobile Portrait -->
-    <div id="rotate-prompt">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="12" y1="18" x2="12.01" y2="18"></line>
-        </svg>
-        <p class="prompt-title" id="rotate-title">Please Rotate Your Device</p>
-        <p id="rotate-desc">This portfolio is designed for landscape viewing to preserve its original A4 horizon layout.
-        </p>
-    </div>
-
     <!-- Top Bar with Back Button -->
     <div class="viewer-header">
         <a href="index.html" class="back-btn">
@@ -293,7 +273,7 @@
         </div>
     </div>
 
-    <!-- Navigation Overlays -->
+    <!-- Desktop Navigation Overlays -->
     <div class="nav-area left" id="nav-prev" style="display: none;">
         <div class="nav-arrow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -311,9 +291,23 @@
         </div>
     </div>
 
-    <!-- Render Canvas -->
+    <!-- Render Canvas with Mobile Ends -->
     <div class="pdf-canvas-container" id="canvas-container" style="display: none;">
+        <div class="mobile-edge-btn prev" id="mobile-prev" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span style="writing-mode: vertical-rl; text-orientation: mixed;">PREV</span>
+        </div>
         <canvas id="pdf-render"></canvas>
+        <div class="mobile-edge-btn next" id="mobile-next" style="display: none;">
+            <span style="writing-mode: vertical-rl; text-orientation: mixed;">NEXT</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </div>
     </div>
 
     <script>
@@ -321,17 +315,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('preferredLanguage');
             const backText = document.getElementById('back-text');
-            const rotateTitle = document.getElementById('rotate-title');
-            const rotateDesc = document.getElementById('rotate-desc');
-
             if (savedLang === 'zh') {
                 backText.textContent = "返回主页";
-                rotateTitle.textContent = "请将设备横屏";
-                rotateDesc.textContent = "本画册原尺寸为A4横板，为保证最佳排版体验，请切换至水平模式阅览。";
             } else if (savedLang === 'ja') {
                 backText.textContent = "ホームに戻る";
-                rotateTitle.textContent = "端末を横向きにしてください";
-                rotateDesc.textContent = "このポートフォリオはA4横レイアウトでデザインされています。横向きによる最適な体験をお楽しみください。";
             }
         });
 
@@ -351,6 +338,8 @@
             canvasContainer = document.getElementById('canvas-container'),
             navPrev = document.getElementById('nav-prev'),
             navNext = document.getElementById('nav-next'),
+            mobilePrev = document.getElementById('mobile-prev'),
+            mobileNext = document.getElementById('mobile-next'),
             pageInfo = document.getElementById('page-info');
 
         // Render the page
@@ -359,69 +348,87 @@
             canvas.style.opacity = '0.5';
 
             pdfDoc.getPage(num).then(page => {
-                // Calculate display scale (accounting for high DPR screens like retina displays)
+                const isMobilePortrait = window.innerWidth <= 768 && window.innerHeight > window.innerWidth;
                 const dpr = window.devicePixelRatio || 1;
 
-                // Get native viewport to calculate aspect ratio
                 const unscaledViewport = page.getViewport({ scale: 1 });
 
-                // Scale to fit screen logic (A4 landscape fits nicely)
-                const padding = window.innerWidth > 768 ? 80 : 20; // Extra padding on desktop vs mobile
+                const padding = window.innerWidth > 768 ? 80 : 0;
+                const topBarHeight = window.innerWidth > 768 ? 80 : 60;
+
                 const maxW = window.innerWidth - padding * 2;
-                const maxH = window.innerHeight - 100; // Account for top bar
+                const maxH = window.innerHeight - topBarHeight - (isMobilePortrait ? 0 : 20);
 
                 const widthScale = maxW / unscaledViewport.width;
                 const heightScale = maxH / unscaledViewport.height;
-                const bestScale = Math.min(widthScale, heightScale);
 
-                // Multiply by DPR to keep canvas sharp on high-res displays
+                let bestScale;
+                if (isMobilePortrait) {
+                    // Mobile Portrait Mode: Height fits perfectly, Width overflows to native scroll left/right!
+                    bestScale = heightScale;
+                } else {
+                    // Normal Desktop / Landscape Mode: Fits entirely inside the wrapper
+                    bestScale = Math.min(widthScale, heightScale);
+                }
+
                 const viewport = page.getViewport({ scale: bestScale * dpr });
 
-                // Set actual canvas size (internal resolution)
                 canvas.width = viewport.width;
                 canvas.height = viewport.height;
-
-                // Set display canvas size via CSS
                 canvas.style.width = `${viewport.width / dpr}px`;
                 canvas.style.height = `${viewport.height / dpr}px`;
 
-                const renderCtx = {
-                    canvasContext: ctx,
-                    viewport: viewport
-                };
+                const renderCtx = { canvasContext: ctx, viewport: viewport };
 
-                // Render page on canvas
                 page.render(renderCtx).promise.then(() => {
                     pageIsRendering = false;
                     canvas.style.opacity = '1';
 
-                    // First load reveal
                     if (loader.style.display !== 'none') {
                         loader.style.display = 'none';
                         canvasContainer.style.display = 'flex';
-                        navPrev.style.display = 'flex';
-                        navNext.style.display = 'flex';
                         pageInfo.style.display = 'block';
                     }
+
+                    if (isMobilePortrait) {
+                        canvasContainer.classList.add('mobile-portrait');
+                        navPrev.style.display = 'none';
+                        navNext.style.display = 'none';
+
+                        // Mobile End Buttons display logic
+                        mobilePrev.style.display = num === 1 ? 'none' : 'flex';
+                        mobileNext.style.display = num === pdfDoc.numPages ? 'none' : 'flex';
+
+                        // Pre-scroll slightly depending on page state
+                        setTimeout(() => {
+                            // Align Canvas left edge perfectly to screen start. Hide PREV button off-screen.
+                            canvasContainer.scrollLeft = num === 1 ? 0 : mobilePrev.offsetWidth;
+                        }, 10);
+
+                    } else {
+                        canvasContainer.classList.remove('mobile-portrait');
+                        navPrev.style.display = 'flex';
+                        navNext.style.display = 'flex';
+                        mobilePrev.style.display = 'none';
+                        mobileNext.style.display = 'none';
+                        canvasContainer.scrollLeft = 0;
+                    }
+
+                    document.getElementById('page-num').textContent = num;
+
+                    navPrev.style.opacity = num === 1 ? '0' : '';
+                    navPrev.style.pointerEvents = num === 1 ? 'none' : 'auto';
+                    navNext.style.opacity = num === pdfDoc.numPages ? '0' : '';
+                    navNext.style.pointerEvents = num === pdfDoc.numPages ? 'none' : 'auto';
 
                     if (pageNumIsPending !== null) {
                         renderPage(pageNumIsPending);
                         pageNumIsPending = null;
                     }
                 });
-
-                // Update page counters
-                document.getElementById('page-num').textContent = num;
-
-                // Dim arrows if at start or end
-                navPrev.style.opacity = num === 1 ? '0' : '';
-                navPrev.style.pointerEvents = num === 1 ? 'none' : 'auto';
-                navNext.style.opacity = num === pdfDoc.numPages ? '0' : '';
-                navNext.style.pointerEvents = num === pdfDoc.numPages ? 'none' : 'auto';
             });
         };
 
-        // Queue rendering if currently rendering
         const queueRenderPage = num => {
             if (pageIsRendering) {
                 pageNumIsPending = num;
@@ -430,7 +437,6 @@
             }
         };
 
-        // Navigate pages
         const onPrevPage = () => {
             if (pageNum <= 1) return;
             pageNum--;
@@ -443,17 +449,21 @@
             queueRenderPage(pageNum);
         };
 
-        // Event listeners
         navPrev.addEventListener('click', onPrevPage);
         navNext.addEventListener('click', onNextPage);
+        mobilePrev.addEventListener('click', () => {
+            onPrevPage();
+        });
+        mobileNext.addEventListener('click', () => {
+            onNextPage();
+        });
 
-        // Keyboard navigation
         document.addEventListener('keydown', e => {
             if (e.key === 'ArrowLeft') onPrevPage();
             if (e.key === 'ArrowRight' || e.key === ' ') onNextPage();
         });
 
-        // Touch Swipe Navigation
+        // Desktop custom swipe interaction
         let touchstartX = 0;
         let touchendX = 0;
 
@@ -467,12 +477,14 @@
         }, { passive: true });
 
         function handleSwipe() {
+            const isMobilePortrait = window.innerWidth <= 768 && window.innerHeight > window.innerWidth;
+            if (isMobilePortrait) return; // Completely yield to native horizontal scrolling instead
+
             const threshold = 50;
-            if (touchendX < touchstartX - threshold) onNextPage();      // Swipe left
-            if (touchendX > touchstartX + threshold) onPrevPage();      // Swipe right
+            if (touchendX < touchstartX - threshold) onNextPage();
+            if (touchendX > touchstartX + threshold) onPrevPage();
         }
 
-        // Fetch PDF via PDF.js
         window.pdfjsLib.getDocument(pdfUrl).promise.then(doc => {
             pdfDoc = doc;
             document.getElementById('page-count').textContent = doc.numPages;
@@ -482,12 +494,11 @@
             console.error(err);
         });
 
-        // Handle Window Resize dynamically
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
-                if (pdfDoc) queueRenderPage(pageNum); // re-render crisp
+                if (pdfDoc) queueRenderPage(pageNum); // re-render layout
             }, 200);
         });
     </script>
