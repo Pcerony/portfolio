@@ -532,4 +532,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- Fetch Behold Instagram JSON Feed ---
+    const beholdFeedContainer = document.getElementById('behold-feed');
+    if (beholdFeedContainer) {
+        fetch('https://feeds.behold.so/q4bJAqAnznsBGekXMood')
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.posts && data.posts.length > 0) {
+                    // Pattern array to keep the original irregular layout aesthetic
+                    const aspectRatios = ['3/4', '4/3', '1/1', '16/9', '3/4', '4/5'];
+                    const postsHTML = data.posts.slice(0, 6).map((post, index) => {
+                        const imgUrl = post.sizes?.medium?.mediaUrl || post.mediaUrl;
+                        const ratio = aspectRatios[index % aspectRatios.length];
+                        return `<a href="${post.permalink}" target="_blank" class="photo-item placeholder-image bg-dark-gray" style="aspect-ratio: ${ratio}; background-image: url('${imgUrl}'); background-size: cover; background-position: center; display: block; border: 1px solid var(--color-border); filter: grayscale(1); transition: filter 0.3s ease;"></a>`;
+                    }).join('');
+                    beholdFeedContainer.innerHTML = postsHTML;
+
+                    // Re-apply hover listeners for new dynamic images
+                    const newItems = beholdFeedContainer.querySelectorAll('.photo-item');
+                    newItems.forEach(item => {
+                        item.addEventListener('mouseenter', () => {
+                            item.style.filter = 'grayscale(0)';
+                            item.style.borderColor = 'var(--color-text)'; // Simulate hover effect
+                        });
+                        item.addEventListener('mouseleave', () => {
+                            item.style.filter = 'grayscale(1)';
+                            item.style.borderColor = 'var(--color-border)';
+                        });
+                    });
+                }
+            })
+            .catch(err => console.error('Error fetching Instagram feed:', err));
+    }
 });
