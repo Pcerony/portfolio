@@ -531,13 +531,11 @@ a {
 /* Embedded Map Styling */
 .gmap-container iframe {
   width: 100%;
-  /* Dark Mode Default: Keep red pins but turn everything else extremely desaturated and dark */
-  filter: sepia(0.8) hue-rotate(320deg) saturate(3) brightness(0.6) invert(0.95);
+  height: 100%;
+  filter: grayscale(1) invert(1);
   transition: filter 3.5s ease-in-out;
-  pointer-events: auto;
 }
 
 body.light-mode .gmap-container iframe {
-  /* Light Mode: Keep red pins glowing while muting backgrounds (water/roads) */
-  filter: sepia(0.8) hue-rotate(320deg) saturate(3) brightness(1.1) contrast(0.9);
+  filter: grayscale(1);
 }
