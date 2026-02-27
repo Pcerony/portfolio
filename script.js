@@ -490,56 +490,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { passive: true });
 
-    // --- Easter Egg: Device Orientation Light Mode ("Blocking Sun" tilt) ---
-    // Since default is now light-mode, the Easter egg toggles to DARK mode when held up.
-    let isTiltDarkMode = false;
-    let readyToToggle = true; // State flag to prevent rapid toggling
+    // --- Theme Switcher (Light/Dark Mode) ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.querySelector('.theme-icon');
 
-    function handleOrientation(event) {
-        // beta is the front-to-back tilt in degrees (-180 to 180)
-        // flat on table = 0. standing vertical = ~90. 
-        // tilting screen down facing user (like holding above head) = > 145
+    // SVG shapes for Sun (Light Mode) and Moon (Dark Mode)
+    const sunSVG = `
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    `;
+    const moonSVG = `
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    `;
 
-        // When lifted extremely high (blocking sun): beta between 145 and 180
-        if (event.beta >= 145 && event.beta <= 180) {
-            if (readyToToggle) {
-                // Perform the toggle action
-                isTiltDarkMode = !isTiltDarkMode;
-                if (isTiltDarkMode) {
-                    document.body.classList.remove('light-mode');
-                } else {
-                    document.body.classList.add('light-mode');
-                }
-                // Disarm the trigger so it doesn't repeatedly toggle while held in this position
-                readyToToggle = false;
+    if (themeToggleBtn) {
+        // Initialize UI icon based on default (which is currently Light Mode via body class)
+        // Light mode = show Moon (to switch to dark), Dark mode = show Sun (to switch to light)
+        const isCurrentlyLight = document.body.classList.contains('light-mode');
+        themeIcon.innerHTML = isCurrentlyLight ? moonSVG : sunSVG;
+
+        themeToggleBtn.addEventListener('click', () => {
+            const willBeLight = !document.body.classList.contains('light-mode');
+
+            if (willBeLight) {
+                document.body.classList.add('light-mode');
+                themeIcon.innerHTML = moonSVG; // Provide icon to switch back to Dark
+            } else {
+                document.body.classList.remove('light-mode');
+                themeIcon.innerHTML = sunSVG;  // Provide icon to switch back to Light
             }
-        }
-        // Re-arm the trigger when the device is returned to a more normal viewing angle (e.g., < 100)
-        else if (event.beta > 0 && event.beta < 100) {
-            readyToToggle = true;
-        }
-    }
-
-    if (typeof window.DeviceOrientationEvent !== 'undefined') {
-        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-            // iOS 13+ Devices: Require user permission triggered by a manual UI interaction.
-            // We politely attach it to the first click/touch interaction anywhere on the body to enable the easter egg.
-            let orientationPermissionGranted = false;
-            document.body.addEventListener('click', () => {
-                if (!orientationPermissionGranted) {
-                    DeviceOrientationEvent.requestPermission()
-                        .then(permissionState => {
-                            if (permissionState === 'granted') {
-                                orientationPermissionGranted = true;
-                                window.addEventListener('deviceorientation', handleOrientation);
-                            }
-                        })
-                        .catch(err => { /* silently ignore if permission denied */ });
-                }
-            }, { once: true });
-        } else {
-            // Non-iOS or older iOS devices that don't need explicit permission
-            window.addEventListener('deviceorientation', handleOrientation);
-        }
+        });
     }
 });
