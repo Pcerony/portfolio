@@ -403,13 +403,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (contactSection) {
                 const rect = contactSection.getBoundingClientRect();
                 // We map this section's relative viewport position to the wave's Y.
-                bottomGroupBaseY = (height * 0.1) + (rect.top * 0.8);
+                // Shifted significantly upwards: target resting point is now negative (above screen top if fully scrolled)
+                bottomGroupBaseY = (height * -0.2) + (rect.top * 1.0);
             }
 
             // Only draw second group if it's remotely close to or inside the viewport to save GPU
             if (bottomGroupBaseY > -3000 && bottomGroupBaseY < height + 800) {
-                // Opacity fades in as it enters
-                const entranceOpacity = Math.min(1, Math.max(0, (height * 1.5 - bottomGroupBaseY) / 400));
+                // Opacity fades in as it enters, trigger even earlier
+                const entranceOpacity = Math.min(1, Math.max(0, (height * 2.0 - bottomGroupBaseY) / 500));
                 drawWaveGroup(bottomGroupBaseY, entranceOpacity);
             }
 
