@@ -397,19 +397,19 @@ document.addEventListener('DOMContentLoaded', () => {
             drawWaveGroup(topGroupBaseY, 1);
 
             // Group 2: The new wave group emerging from the bottom
-            const hobbiesSection = document.getElementById('hobbies');
+            const contactSection = document.getElementById('contact');
             let bottomGroupBaseY = height * 2; // Default to hidden off-screen
 
-            if (hobbiesSection) {
-                const rect = hobbiesSection.getBoundingClientRect();
+            if (contactSection) {
+                const rect = contactSection.getBoundingClientRect();
                 // We map this section's relative viewport position to the wave's Y.
-                // When hobbies is at bottom of screen (rect.top == height), wave is at bottom edge (height).
+                // When contact is at bottom of screen (rect.top == height), wave is at bottom edge (height).
                 // Use a steeper multiplier (0.6) so it rises much faster, and target a higher resting point (height * 0.4).
                 bottomGroupBaseY = (height * 0.45) + (rect.top * 0.55);
             }
 
             // Only draw second group if it's remotely close to or inside the viewport to save GPU
-            if (bottomGroupBaseY > -400 && bottomGroupBaseY < height + 400) {
+            if (bottomGroupBaseY > -3000 && bottomGroupBaseY < height + 400) {
                 // Opacity fades in as it enters
                 const entranceOpacity = Math.min(1, Math.max(0, (height + 200 - bottomGroupBaseY) / 400));
                 drawWaveGroup(bottomGroupBaseY, entranceOpacity);
