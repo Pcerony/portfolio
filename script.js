@@ -560,4 +560,37 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(err => console.error('Error fetching Instagram feed:', err));
     }
+    // --- QR Full Screen Modal Logic ---
+    const qrTriggers = document.querySelectorAll('.qr-trigger');
+    const qrModal = document.getElementById('qr-modal');
+    const qrModalImg = document.getElementById('qr-modal-img');
+    const qrModalText = document.getElementById('qr-modal-text');
+    const qrClose = document.getElementById('qr-close');
+
+    if (qrModal) {
+        qrTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                qrModalImg.src = trigger.dataset.qr;
+                qrModalText.textContent = trigger.dataset.id;
+                qrModal.classList.add('active');
+            });
+        });
+
+        const closeModal = () => {
+            qrModal.classList.remove('active');
+        };
+
+        if (qrClose) {
+            qrClose.addEventListener('click', closeModal);
+        }
+
+        qrModal.addEventListener('click', (e) => {
+            if (e.target === qrModal) {
+                closeModal();
+            }
+        });
+    }
+
 });

@@ -454,24 +454,19 @@
                                     <a href="https://www.linkedin.com/in/%E5%B9%B3%E6%88%90-%E7%8E%8B-4872352b3/"
                                         target="_blank" rel="noopener noreferrer"
                                         class="text-white font-medium hover-opacity">LinkedIn</a>
-                                    <div class="text-white font-medium tooltip-link" tabindex="0">
+                                    <div class="text-white font-medium qr-trigger hover-opacity"
+                                        style="cursor: pointer;" data-qr="./images/QR1.png" data-id="WeChat ID: cerony">
                                         WeChat
-                                        <span class="qr-tooltip">
-                                            <img src="./images/QR1.png" alt="WeChat QR">
-                                            <span>ID: heisei_design</span>
-                                        </span>
                                     </div>
                                 </div>
                                 <div class="social-links" style="margin-top: 0.75rem;">
                                     <a href="https://www.instagram.com/city_signage" target="_blank"
                                         rel="noopener noreferrer"
                                         class="text-white font-medium hover-opacity">Instagram</a>
-                                    <div class="text-white font-medium tooltip-link" tabindex="0">
+                                    <div class="text-white font-medium qr-trigger hover-opacity"
+                                        style="cursor: pointer;" data-qr="./images/QR2.jpg"
+                                        data-id="Red ID: 6114500318">
                                         <span data-i18n="social_red">RED (小红书)</span>
-                                        <span class="qr-tooltip">
-                                            <img src="./images/QR2.jpg" alt="RED QR">
-                                            <span>ID: heisei_design</span>
-                                        </span>
                                     </div>
                                     <a href="https://youtube.com/@cerony-m4b?si=LZ4Fb85SfpcDNq2I" target="_blank"
                                         rel="noopener noreferrer"
@@ -483,6 +478,16 @@
                 </div>
             </section>
     </main>
+
+    <!-- QR Full Screen Modal -->
+    <div id="qr-modal" class="qr-modal">
+        <div class="qr-modal-content">
+            <button class="qr-close" id="qr-close">&times;</button>
+            <img id="qr-modal-img" class="qr-modal-img" src="" alt="QR Code">
+            <div id="qr-modal-text" class="text-white font-medium text-center mt-4 tracking-wide"
+                style="font-size: 0.95rem; user-select: text;"></div>
+        </div>
+    </div>
 
     <footer class="footer text-center py-8">
         <p class="text-dark-gray text-xs font-light tracking-wide">&copy; 2026 HEISEI DESIGN. All rights reserved.</p>

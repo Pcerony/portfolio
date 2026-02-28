@@ -563,64 +563,70 @@ body.light-mode .gmap-container iframe {
   }
 }
 
-/* Image/Text CSS Tooltip */
-.tooltip-link {
-  position: relative;
-  /* Override default <a> behavior if it lacks href */
-  cursor: pointer;
+/* QR Full Screen Modal */
+.qr-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.qr-tooltip {
-  position: absolute;
-  bottom: 150%;
-  /* Hover over the text */
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
-  background-color: var(--color-white);
-  color: var(--color-bg);
-  padding: 8px;
-  border-radius: 6px;
-  font-size: 0.70rem;
-  white-space: nowrap;
+.qr-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
 
-  /* Layout: Center items (Image above Text usually) */
+.qr-modal-content {
+  background-color: var(--color-bg);
+  padding: 2.5rem 2rem 2rem;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  z-index: 10;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 90vw;
 }
 
-.qr-tooltip img {
-  width: 140px;
+.qr-modal.active .qr-modal-content {
+  transform: translateY(0) scale(1);
+}
+
+.qr-modal-img {
+  width: 280px;
   height: auto;
+  max-width: 100%;
+  border-radius: 4px;
   object-fit: contain;
-  border-radius: 2px;
   display: block;
 }
 
-/* Arrow for tooltip */
-.qr-tooltip::after {
-  content: '';
+.qr-close {
   position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: var(--color-white) transparent transparent transparent;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: #888;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s;
 }
 
-.tooltip-link:hover .qr-tooltip,
-.qr-tooltip:hover {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
+.qr-close:hover {
+  color: #fff;
 }
