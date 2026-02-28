@@ -59,6 +59,7 @@ const translations = {
         contact_desc: "Currently open for various design-related inquiries :)",
         email_label: "Email",
         social_label: "Social",
+        social_red: "RED NOTE",
     },
     zh: {
         nav_about: "简介",
@@ -120,7 +121,7 @@ const translations = {
         contact_desc: "目前可接受各类设计相关咨询 :)",
         email_label: "邮箱",
         social_label: "社交账号",
-        social_red: "RED (小红书)",
+        social_red: "小红书",
     },
     ja: {
         nav_about: "概要",

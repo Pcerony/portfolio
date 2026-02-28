@@ -557,11 +557,7 @@ body.light-mode .gmap-container iframe {
   align-items: flex-end;
 }
 
-@media (max-width: 480px) {
-  .social-links-groups {
-    align-items: flex-start;
-  }
-}
+/* Removed overriding mobile alignment */
 
 /* QR Full Screen Modal */
 .qr-modal {
