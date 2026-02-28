@@ -447,8 +447,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (maxTranslate <= 0) return;
 
-            // Add padding at the end of scroll for better feel
-            maxTranslate += 100;
+            const isMobile = window.innerWidth <= 768;
+
+            // Add padding at the end of scroll for better feel, less on mobile to prevent bottom leakage
+            maxTranslate += isMobile ? 20 : 100;
 
             const spacer = document.createElement('div');
             spacer.className = 'work-item-spacer';
@@ -459,8 +461,12 @@ document.addEventListener('DOMContentLoaded', () => {
             item.parentNode.insertBefore(spacer, item);
             spacer.appendChild(item);
 
-            // Center vertically
-            const topOffset = Math.max(0, (window.innerHeight - item.offsetHeight) / 2);
+            // Center vertically.
+            // On mobile, force it to stick slightly lower (e.g. at 15% top) to avoid hitting the header edge before starting 
+            const topOffset = isMobile
+                ? window.innerHeight * 0.15
+                : Math.max(0, (window.innerHeight - item.offsetHeight) / 2);
+
             item.style.position = 'sticky';
             item.style.top = `${topOffset}px`;
 
