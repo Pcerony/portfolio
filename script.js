@@ -120,6 +120,7 @@ const translations = {
         contact_desc: "目前可接受各类设计相关咨询 :)",
         email_label: "邮箱",
         social_label: "社交账号",
+        social_red: "RED (小红书)",
     },
     ja: {
         nav_about: "概要",
@@ -180,6 +181,7 @@ const translations = {
         contact_desc: "様々なデザイン関連のご相談を受け付けております :)",
         email_label: "メール",
         social_label: "ソーシャル",
+        social_red: "RED NOTE",
     }
 };
 

@@ -479,6 +479,8 @@ body {
 .social-links {
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
+  /* allow natural wrap if screen tiny */
 }
 
 a {
@@ -546,4 +548,77 @@ a {
 
 body.light-mode .gmap-container iframe {
   filter: grayscale(1);
+}
+
+/* Social link groups for multi-line */
+.social-links-groups {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+@media (max-width: 480px) {
+  .social-links-groups {
+    align-items: flex-start;
+  }
+}
+
+/* Image/Text CSS Tooltip */
+.tooltip-link {
+  position: relative;
+  /* Override default <a> behavior if it lacks href */
+  cursor: pointer;
+}
+
+.qr-tooltip {
+  position: absolute;
+  bottom: 150%;
+  /* Hover over the text */
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background-color: var(--color-white);
+  color: var(--color-bg);
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.70rem;
+  white-space: nowrap;
+
+  /* Layout: Center items (Image above Text usually) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.qr-tooltip img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+
+/* Arrow for tooltip */
+.qr-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--color-white) transparent transparent transparent;
+}
+
+.tooltip-link:hover .qr-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
