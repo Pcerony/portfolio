@@ -208,7 +208,13 @@
 
         @media (max-width: 768px) and (orientation: portrait) {
             .viewer-header {
-                display: none !important;
+                background: none;
+                height: 60px;
+                padding: 0 1rem;
+            }
+
+            #back-text {
+                display: none;
             }
         }
 
@@ -222,9 +228,7 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            padding: 40px 0;
-            box-sizing: border-box;
+            justify-content: center;
         }
 
         .mobile-edge-btn.prev {
@@ -331,20 +335,9 @@
                 </svg>
                 <span style="writing-mode: vertical-rl; text-orientation: mixed;">PREV</span>
             </div>
-            <a href="index.html" class="edge-action back-action">
-                <span style="writing-mode: vertical-rl; text-orientation: mixed;" id="mobile-back-text">BACK</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <polyline points="19 12 12 19 5 12"></polyline> <!-- Arrow pointing down -->
-                </svg>
-            </a>
         </div>
         <canvas id="pdf-render"></canvas>
         <div class="mobile-edge-btn next" id="mobile-next">
-            <div class="edge-action" style="cursor: default; pointer-events: none; color: #666;">
-                <span style="writing-mode: vertical-rl; text-orientation: mixed;" id="mobile-page-text">1 / X</span>
-            </div>
             <div class="edge-action" id="mobile-next-action">
                 <span style="writing-mode: vertical-rl; text-orientation: mixed;">NEXT</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -360,13 +353,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('preferredLanguage');
             const backText = document.getElementById('back-text');
-            const mobileBackText = document.getElementById('mobile-back-text');
             if (savedLang === 'zh') {
                 backText.textContent = "返回主页";
-                mobileBackText.textContent = "返回";
             } else if (savedLang === 'ja') {
                 backText.textContent = "ホームに戻る";
-                mobileBackText.textContent = "戻る";
             }
         });
 
@@ -392,7 +382,6 @@
             mobileNext = document.getElementById('mobile-next'),
             mobilePrevAction = document.getElementById('mobile-prev-action'),
             mobileNextAction = document.getElementById('mobile-next-action'),
-            mobilePageText = document.getElementById('mobile-page-text'),
             pageInfo = document.getElementById('page-info');
 
         // Render the page
@@ -407,7 +396,7 @@
                 const unscaledViewport = page.getViewport({ scale: 1 });
 
                 const padding = window.innerWidth > 768 ? 80 : 0;
-                const topBarHeight = window.innerWidth > 768 ? 80 : 60;
+                const topBarHeight = window.innerWidth > 768 ? 80 : 0; // Float above, allow 100vh canvas
 
                 const maxW = window.innerWidth - padding * 2;
                 const maxH = window.innerHeight - topBarHeight - (isMobilePortrait ? 0 : 20);
@@ -451,8 +440,6 @@
                         // Mobile End Buttons display logic
                         mobilePrevAction.classList.toggle('disabled', num === 1);
                         mobileNextAction.classList.toggle('disabled', num === pdfDoc.numPages);
-
-                        mobilePageText.textContent = `${num} / ${pdfDoc.numPages}`;
 
                         // Pre-scroll slightly depending on page state
                         setTimeout(() => {
