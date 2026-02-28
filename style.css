@@ -590,8 +590,8 @@ body.light-mode .gmap-container iframe {
   gap: 6px;
 
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
   font-weight: 500;
   letter-spacing: 0.05em;
   z-index: 10;
@@ -599,9 +599,9 @@ body.light-mode .gmap-container iframe {
 }
 
 .qr-tooltip img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
+  width: 140px;
+  height: auto;
+  object-fit: contain;
   border-radius: 2px;
   display: block;
 }
@@ -618,7 +618,9 @@ body.light-mode .gmap-container iframe {
   border-color: var(--color-white) transparent transparent transparent;
 }
 
-.tooltip-link:hover .qr-tooltip {
+.tooltip-link:hover .qr-tooltip,
+.qr-tooltip:hover {
   opacity: 1;
+  visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
