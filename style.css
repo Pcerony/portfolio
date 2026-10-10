@@ -913,7 +913,7 @@ body.project-dialog-open {
 .project-media .work-image {
   aspect-ratio: auto;
   height: min(56vh, 620px);
-    background: var(--project-image-bg);
+  background: var(--project-image-bg);
 }
 
 .project-media .work-image img {
@@ -939,7 +939,7 @@ body.project-dialog-open {
 .category-cover img.lab-logo-cover {
   object-fit: contain;
   padding: 12%;
-    background: var(--project-image-bg);
+  background: var(--project-image-bg);
 }
 
 @media (min-width: 769px) {
