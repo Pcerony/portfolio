@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
         render();
     }
 
-    // Apple-style Horizontal Scroll Jacking (Desktop Only)
+    // Shared vertical-to-horizontal project scrolling.
     let scrollJackers = [];
 
     function setupScrollJacking() {
@@ -452,10 +452,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const track = item.querySelector('.work-images-scroll, .work-images-grid-scroll');
             if (!track) return;
 
-            // Touch screens retain the native horizontal track for direct swiping.
-            // Tall projects also stay unpinned so all captions remain reachable.
-            if (window.innerWidth <= 768 ||
-                (item.classList.contains('project-media') && item.offsetHeight > window.innerHeight - 80)) return;
+            // Tall new projects stay unpinned so all captions remain reachable.
+            if (item.classList.contains('project-media') && item.offsetHeight > window.innerHeight - 80) return;
 
             // Calculate scrollable difference
             let maxTranslate = track.scrollWidth - track.clientWidth;
