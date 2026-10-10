@@ -940,6 +940,12 @@ body.project-dialog-open {
   background: #f7f7f7;
 }
 
+@media (min-width: 769px) {
+  .project-media[data-lab-project="operations"] .work-image {
+    height: min(44vh, 480px);
+  }
+}
+
 @media (max-width: 768px) {
   .project-media .work-image {
     height: min(48svh, 440px);
