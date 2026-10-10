@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>HEISEI'S PAGE</title>
+    <meta name="portfolio-version" content="20261011">
     <!-- Favicon (Red Knot Logo) -->
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20261011">
 </head>
 
 <body class="light-mode">
@@ -51,7 +52,7 @@
     </header>
 
     <!-- Content Sections -->
-    <main>
+    <main id="home-page">
         <!-- 1. Cover -->
         <section id="cover" class="section fill-height flex-center">
             <div class="container text-center reveal-on-load">
@@ -63,11 +64,12 @@
         <!-- 2. About -->
         <section id="about" class="section pt-section pb-section">
             <div class="container reveal">
-                <p class="section-label text-dark-gray" data-i18n="nav_about">About</p>
-                <h2 class="section-title text-light-gray leading-relaxed mt-4" data-i18n="about_text">
-                    My focus lies in discovering the 'leverage points' hidden within user experiences, using minimal
-                    effort to drive maximum impact.
-                </h2>
+                <p class="section-label text-dark-gray" data-i18n="nav_about">Self Introduction</p>
+                <div id="profile-identity" class="profile-identity">
+                    <h2>王平成</h2>
+                    <p class="profile-english-name">OU HEISEI</p>
+                    <p class="profile-gender"><span data-i18n="profile_gender_label">Gender</span><span data-i18n="profile_gender_value">Male</span></p>
+                </div>
 
                 <div class="about-info border-top pt-4"
                     style="margin-top: 2.5rem; border-top: 1px solid var(--color-border); padding-top: 2rem; display: flex; flex-wrap: wrap; gap: 2.5rem;">
@@ -76,6 +78,10 @@
                     <p class="text-white font-medium text-sm" data-i18n="info_nat_val">M.A. Candidate at Kyushu
                         University</p>
                 </div>
+                <p class="about-focus text-light-gray" data-i18n="about_text">
+                    My focus lies in discovering the 'leverage points' hidden within user experiences, using minimal
+                    effort to drive maximum impact.
+                </p>
             </div>
         </section>
 
@@ -113,12 +119,176 @@
             </div>
         </section>
 
-        <!-- 3. Portfolio -->
+        <!-- 3.5 Research -->
+        <section id="research" class="section pt-section pb-section">
+            <div class="container reveal">
+                <p class="section-label text-dark-gray mb-8" data-i18n="nav_research">Research</p>
+                <a id="research-cover" class="research-cover" href="#research-detail">
+                    <img src="./images/research/gaze-heatmap.png" alt="Gaze attention heatmap over an interpretive plant sign" loading="lazy">
+                    <div class="research-cover-caption">
+                        <h3 data-i18n="research_main_title">Master's Research Overview</h3>
+                        <span class="research-cover-action"><span data-i18n="research_open">Explore Research</span><span aria-hidden="true">&rarr;</span></span>
+                    </div>
+                </a>
+                <div id="research-source" hidden>
+
+                <!-- Master Research Hero Intro -->
+                <div class="research-main reveal-item mb-12">
+                    <img class="research-main-image research-heatmap mb-8" src="./images/research/gaze-heatmap.png" alt="Gaze attention heatmap over an interpretive plant sign" loading="lazy">
+
+                    <h3 class="font-medium text-white text-xl" data-i18n="research_main_title">Master's Research
+                        Overview</h3>
+                    <p class="text-xs text-dark-gray uppercase tracking-widest mt-2 mb-2 font-medium"
+                        data-i18n="research_main_sub">2024 - 2025 / KYUSHU UNIVERSITY</p>
+                    <p class="font-light text-gray mt-2 text-md leading-relaxed" data-i18n="research_main_desc">A
+                        comprehensive exploration of co-creation tools designed for interpretive signage, focusing on
+                        collaborative design methodologies.</p>
+                </div>
+
+                <div class="research-list" style="display: flex; flex-direction: column; gap: 2.5rem;">
+                    <a href="https://pcerony.github.io/signage-annotator/" class="research-item hover-opacity group"
+                        style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; text-decoration: none;">
+                        <div class="research-thumb bg-dark-gray"
+                            style="width: 80px; height: 80px; flex-shrink: 0; background-color: #1a1a1a; background-image: url('./images/research/R1.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="research-text">
+                            <h3 class="font-medium text-white text-lg" data-i18n="research_1_title">Signage Annotator: Image Coding and Annotation Tool</h3>
+                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
+                                data-i18n="research_1_sub">2026 / TOOL DEVELOPMENT</p>
+                            <p class="font-light text-gray mt-2 text-sm leading-relaxed" data-i18n="research_1_desc">A tool for coding and analyzing interpretive signage with A/R/S design principles.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://eyetracktool-fluxsyak.manus.space/" class="research-item hover-opacity group"
+                        style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; text-decoration: none;">
+                        <div class="research-thumb bg-dark-gray"
+                            style="width: 80px; height: 80px; flex-shrink: 0; background-color: #1a1a1a; background-image: url('./images/research/R2.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="research-text">
+                            <h3 class="font-medium text-white text-lg" data-i18n="research_2_title">Visual Analytics: Eye Tracking Tool</h3>
+                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
+                                data-i18n="research_2_sub">2026 / TOOL DEVELOPMENT</p>
+                            <p class="font-light text-gray mt-2 text-sm leading-relaxed" data-i18n="research_2_desc">
+                                A webcam-based prototype for examining visual attention to interpretive signage.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.jstage.jst.go.jp/article/designresearch/91/0/91_62/_article/-char/ja"
+                        class="research-item hover-opacity group"
+                        style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; text-decoration: none;">
+                        <div class="research-thumb bg-dark-gray"
+                            style="width: 80px; height: 80px; flex-shrink: 0; background-color: #1a1a1a; background-image: url('./images/research/R3.png'); background-size: cover; background-position: center;">
+                        </div>
+
+                        <div class="research-text">
+                            <h3 class="font-medium text-white text-lg" data-i18n="research_3_title">Publication</h3>
+                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
+                                data-i18n="research_3_sub">2025 / ACADEMIC PUBLICATION</p>
+                            <p class="font-light text-gray mt-2 text-sm leading-relaxed" data-i18n="research_3_desc">
+                                Published research on participatory and systemic problem extraction.</p>
+                        </div>
+                    </a>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design practice grouped by project context -->
         <section id="portfolio" class="section pt-section pb-section">
             <div class="container">
-                <p class="section-label text-dark-gray mb-8" data-i18n="portfolio_title">Recent Works</p>
+                <p class="section-label text-dark-gray mb-8" data-i18n="portfolio_title">Design Works</p>
+                <div class="category-cover-grid">
+                    <a id="cover-lab" class="category-cover" href="#works-lab">
+                        <img src="./images/lab/logo.png" alt="SoDesLab logo" class="lab-logo-cover" loading="lazy">
+                        <span data-i18n="category_lab">SodesLab</span>
+                        <small data-i18n="category_lab_sub">Website Operations / Merchandise Development</small>
+                    </a>
+                    <a id="cover-aws" class="category-cover" href="#works-aws">
+                        <img src="./images/aws/shirt-front.jpg" alt="UG community T-shirt" loading="lazy">
+                        <span data-i18n="category_aws">Amazon Web Service User Group</span>
+                        <small data-i18n="category_aws_sub">Merchandise Development</small>
+                    </a>
+                    <a id="cover-everyday" class="category-cover" href="#works-everyday">
+                        <img src="./images/other/01.png" alt="Design archive cover" loading="lazy">
+                        <span data-i18n="category_everyday">Design Practice</span>
+                    </a>
+                    <a id="cover-concept" class="category-cover" href="#works-concept">
+                        <img src="./images/work1/01.png" alt="OVO AI hardware design" loading="lazy">
+                        <span data-i18n="category_concept">Concept Design</span>
+                    </a>
+                </div>
 
-                <div class="portfolio-grid">
+                <section id="works-aws" class="portfolio-band" aria-labelledby="cover-aws" tabindex="-1" hidden>
+<h2 class="portfolio-band-title text-white" data-i18n="category_aws">Amazon Web Service User Group</h2>
+<p class="portfolio-band-subtitle" data-i18n="category_aws_sub">Merchandise Development</p>
+<div class="portfolio-grid">
+<article class="work-item project-media aws-project" data-aws-project="shirt" >
+<div class="work-images-scroll"><div class="work-image"><img src="./images/aws/shirt-front.jpg" alt="Community T-shirt front composition" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/aws/shirt-side.jpg" alt="Community T-shirt side and Leader sleeve" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="aws_shirt_title">UG | Community T-shirt</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="aws_shirt_sub">APPAREL GRAPHICS / COMMUNITY IDENTITY</p><p class="text-gray text-sm mt-2" data-i18n="aws_shirt_desc">Code-inspired graphics and community messages translated into chest and sleeve compositions.</p></div>
+</article>
+<article class="work-item project-media aws-project" data-aws-project="bag">
+<div class="work-image-single"><div class="work-image"><img src="./images/aws/bag-main.jpg" alt="Selected pouch with mint green and yellow service icons" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="aws_bag_title">GCR UG | Tyvek Pouch</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="aws_bag_sub">MERCHANDISE / GRAPHIC APPLICATION</p><p class="text-gray text-sm mt-2" data-i18n="aws_bag_desc">Mint green and yellow cloud-service icons on the selected purple Tyvek pouch design.</p></div>
+</article>
+</div>
+</section>
+
+                <section id="works-lab" class="portfolio-band" aria-labelledby="cover-lab" tabindex="-1" hidden>
+<h2 class="portfolio-band-title text-white" data-i18n="category_lab">SoDesLab</h2>
+<p class="portfolio-band-subtitle" data-i18n="category_lab_sub">Website Operations / Merchandise Development</p>
+<div class="portfolio-grid">
+<article class="work-item project-media" data-lab-project="development">
+<div class="work-images-scroll"><div class="work-image"><img src="./images/lab/home.jpg" alt="Home website screenshot" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/lab/about.jpg" alt="Completed SoDesLab logo animation on About website screenshot" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/lab/members.jpg" alt="Members website screenshot" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/lab/research.jpg" alt="Research website screenshot" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/lab/publications.jpg" alt="Publications website screenshot" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/lab/lablife.jpg" alt="Lab Life website screenshot" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="lab_web_title">SoDesLab | Website Development</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="lab_web_sub">WEB DEVELOPMENT</p><p class="text-gray text-sm mt-2" data-i18n="lab_web_role">Contribution: code implementation, not visual design.</p></div><a href="https://sodes.org/" target="_blank" rel="noopener noreferrer" class="lab-project-link text-white" data-i18n="lab_web_link">Visit Website</a>
+</article>
+<article class="work-item project-media" data-lab-project="operations">
+<div class="work-images-scroll"><div class="work-image"><img src="./images/lab/plog-wall.jpg" alt="Lab P-log shared photo and diary wall" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/lab/plog-story.jpg" alt="Loaded diary article by Heisei" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="lab_ops_title">SoDesLab | Lab P-log</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="lab_ops_sub">WEBSITE OPERATIONS / AUTOMATED PUBLISHING</p><p class="text-gray text-sm mt-2" data-i18n="lab_ops_desc">A shared photo wall where lab members pair their photographs with diary-style stories. Photo cards lead to the full article, bringing individual experiences into the lab's collective record.</p></div><p class="text-gray text-sm mt-2" data-i18n="lab_ops_flow">Members write in Google Docs. A local AI workflow checks for updates on a schedule, downloads and parses articles, identifies authors and dates, uploads media and content to the server, and updates the website in chronological order.</p>
+</article>
+<article class="work-item project-media" data-lab-project="shirts">
+<div class="work-images-scroll"><div class="work-image"><img src="./images/lab/shirt-front.jpg" alt="Lab member Zoe T-shirt front mockup" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/lab/shirt-side.jpg" alt="Lab member T-shirt side mockup and umbrella sleeve logo" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="lab_shirt_title">SoDesLab | Member T-shirts</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="lab_shirt_sub">MERCHANDISE DEVELOPMENT / APPAREL MOCKUPS</p><p class="text-gray text-sm mt-2" data-i18n="lab_shirt_desc">Personalized lettering for lab members, combined with the SoDesLab chest wordmark and umbrella sleeve symbol. Front and side mockups show the relationship between personal identity and the lab.</p></div>
+</article>
+</div>
+<template data-content-slot="lab-merchandise"></template>
+<template data-content-slot="lab-exhibition-map"></template>
+<template data-content-slot="lab-hito-hana"></template>
+</section>
+
+                <section id="works-everyday" class="portfolio-band" aria-labelledby="cover-everyday" tabindex="-1" hidden>
+<h2 class="portfolio-band-title text-white" data-i18n="category_everyday">Design Practice</h2>
+<div class="portfolio-grid">
+<article class="work-item project-media" data-practice-project="dredger">
+<div class="work-image-single"><div class="work-image"><img src="./images/other/01.png" alt="MUSH 3D printed dredger form and structure validation model" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="practice_dredger_title">MUSH | Dredger Validation Model</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="practice_model_sub">PHYSICAL PROTOTYPE / DESIGN VALIDATION</p><p class="text-gray text-sm mt-2" data-i18n="practice_dredger_desc">A 3D printed physical model of the concept dredger, used to validate its form and structural relationships.</p></div>
+</article>
+<article class="work-item project-media" data-practice-project="cup">
+<div class="work-image-single"><div class="work-image"><img src="./images/other/02.png" alt="Smart assistant coffee cup structural validation model" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="practice_cup_title">Smart Assistant Coffee Cup | Structural Model</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="practice_model_sub"></p><p class="text-gray text-sm mt-2" data-i18n="practice_cup_desc">A physical structural model for the smart assistant coffee cup, exploring the arrangement and fit of its components.</p></div>
+</article>
+<article class="work-item project-media" data-practice-project="solar">
+<div class="work-images-scroll"><div class="work-image"><img src="./images/other/03.png" alt="Flexible solar home storage system form validation prototype" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/other/09.png" alt="Solar power storage circuit validation model" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="practice_solar_title">Flexible Solar Panels | Home Energy Storage</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="practice_model_sub"></p><p class="text-gray text-sm mt-2" data-i18n="practice_solar_desc">Two prototypes for one home energy-storage project: a form-validation prototype using flexible solar panels, and a functional circuit-validation model for power generation and storage.</p></div>
+</article>
+<article class="work-item project-media" data-practice-project="braille">
+<div class="work-image-single"><div class="work-image"><img src="./images/other/11.png" alt="Parametric 3D printed braille chocolate molds" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="practice_braille_title">Braille Chocolate | Parametric Mold</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="practice_model_sub"></p><p class="text-gray text-sm mt-2" data-i18n="practice_braille_desc">A program converts Japanese or English input into braille and generates a parametric mold for 3D printing. Chocolate is poured into the mold and cooled to create tactile braille chocolate.</p></div>
+</article>
+</div>
+</section>
+
+                <section id="works-concept" class="portfolio-band" aria-labelledby="cover-concept" tabindex="-1" hidden>
+                    <h2 class="portfolio-band-title text-white" data-i18n="category_concept">Concept Design</h2>
+                    <div class="portfolio-grid">
                     <!-- Work Item 1 -->
                     <div class="work-item">
                         <div class="work-images-scroll">
@@ -189,19 +359,13 @@
                         </div>
                     </div>
 
+
+                    </div>
+                    <div class="portfolio-grid">
                     <!-- Work Item 4 (Other Works Mini Gallery) -->
                     <div class="work-item">
                         <div class="work-images-grid-scroll">
                             <!-- Column 1 -->
-                            <div class="work-image bg-dark-gray placeholder-image">
-                                <img src="./images/other/01.png" alt="Other Work 1">
-                            </div>
-                            <div class="work-image bg-medium-gray placeholder-image">
-                                <img src="./images/other/02.png" alt="Other Work 2">
-                            </div>
-                            <div class="work-image bg-gray placeholder-image">
-                                <img src="./images/other/03.png" alt="Other Work 3">
-                            </div>
                             <!-- Column 2 -->
                             <div class="work-image bg-dark-gray placeholder-image">
                                 <img src="./images/other/04.png" alt="Other Work 4">
@@ -219,15 +383,9 @@
                             <div class="work-image bg-medium-gray placeholder-image">
                                 <img src="./images/other/08.png" alt="Other Work 8">
                             </div>
-                            <div class="work-image bg-gray placeholder-image">
-                                <img src="./images/other/09.png" alt="Other Work 9">
-                            </div>
                             <!-- Column 4 -->
                             <div class="work-image bg-dark-gray placeholder-image">
                                 <img src="./images/other/10.png" alt="Other Work 10">
-                            </div>
-                            <div class="work-image bg-medium-gray placeholder-image">
-                                <img src="./images/other/11.png" alt="Other Work 11">
                             </div>
                             <div class="work-image bg-gray placeholder-image">
                                 <img src="./images/other/12.png" alt="Other Work 12">
@@ -282,81 +440,11 @@
                             </a>
                         </div>
                     </div>
-                </div>
+
+                    </div>
+                </section>
             </div>
         </section>
-
-        <!-- 3.5 Research -->
-        <section id="research" class="section pt-section pb-section">
-            <div class="container reveal">
-                <p class="section-label text-dark-gray mb-8" data-i18n="nav_research">Research</p>
-
-                <!-- Master Research Hero Intro -->
-                <div class="research-main reveal-item mb-12">
-                    <div class="research-main-image bg-medium-gray mb-8"
-                        style="aspect-ratio: 16/9; width: 100%; background-image: url('./images/research/R0.png'); background-size: cover; background-position: center;">
-                    </div>
-
-                    <h3 class="font-medium text-white text-xl" data-i18n="research_main_title">Master's Research
-                        Overview</h3>
-                    <p class="text-xs text-dark-gray uppercase tracking-widest mt-2 mb-2 font-medium"
-                        data-i18n="research_main_sub">2024 - 2025 / KYUSHU UNIVERSITY</p>
-                    <p class="font-light text-gray mt-2 text-md leading-relaxed" data-i18n="research_main_desc">A
-                        comprehensive exploration of co-creation tools designed for interpretive signage, focusing on
-                        collaborative design methodologies.</p>
-                </div>
-
-                <div class="research-list" style="display: flex; flex-direction: column; gap: 2.5rem;">
-                    <a href="https://pcerony.github.io/signage-annotator/" class="research-item hover-opacity group"
-                        style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; text-decoration: none;">
-                        <div class="research-thumb bg-dark-gray"
-                            style="width: 80px; height: 80px; flex-shrink: 0; background-color: #1a1a1a; background-image: url('./images/research/R1.png'); background-size: cover; background-position: center;">
-                        </div>
-                        <div class="research-text">
-                            <h3 class="font-medium text-white text-lg" data-i18n="research_1_title">Master's Thesis:
-                                Minimalist Interfaces</h3>
-                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
-                                data-i18n="research_1_sub">2024 / THESIS PROJECT</p>
-                            <p class="font-light text-gray mt-2 text-sm leading-relaxed" data-i18n="research_1_desc">A
-                                comprehensive study on how extreme minimalism affects cognitive load and task completion
-                                times in professional software tools.</p>
-                        </div>
-                    </a>
-
-                    <a href="https://eyetracktool-fluxsyak.manus.space/" class="research-item hover-opacity group"
-                        style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; text-decoration: none;">
-                        <div class="research-thumb bg-dark-gray"
-                            style="width: 80px; height: 80px; flex-shrink: 0; background-color: #1a1a1a; background-image: url('./images/research/R2.png'); background-size: cover; background-position: center;">
-                        </div>
-                        <div class="research-text">
-                            <h3 class="font-medium text-white text-lg" data-i18n="research_2_title">Publication: The
-                                Aesthetics of Void</h3>
-                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
-                                data-i18n="research_2_sub">2025 / ACADEMIC PUBLICATION</p>
-                            <p class="font-light text-gray mt-2 text-sm leading-relaxed" data-i18n="research_2_desc">
-                                Presented at the International Design Conference, exploring the cultural and
-                                psychological
-                                implications of negative space in digital environments.</p>
-                        </div>
-                    </a>
-
-                    <a href="https://www.jstage.jst.go.jp/article/designresearch/91/0/91_62/_article/-char/ja"
-                        class="research-item hover-opacity group"
-                        style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; display: flex; gap: 1.5rem; align-items: flex-start; text-decoration: none;">
-                        <div class="research-thumb bg-dark-gray"
-                            style="width: 80px; height: 80px; flex-shrink: 0; background-color: #1a1a1a; background-image: url('./images/research/R3.png'); background-size: cover; background-position: center;">
-                        </div>
-
-                        <div class="research-text">
-                            <h3 class="font-medium text-white text-lg" data-i18n="research_3_title">Publication</h3>
-                            <p class="text-xs text-dark-gray uppercase tracking-widest mt-1 mb-2 font-medium"
-                                data-i18n="research_3_sub">2025 / ACADEMIC PUBLICATION</p>
-                            <p class="font-light text-gray mt-2 text-sm leading-relaxed" data-i18n="research_3_desc">
-                                Presented at the International Design Conference.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
             <!-- 4. Hobbies -->
             <section id="hobbies" class="section pt-section pb-section" style="margin-top: 4rem;">
                 <div class="container reveal">
@@ -478,6 +566,12 @@
                 </div>
             </section>
     </main>
+    <div id="detail-pages" hidden>
+        <div class="container">
+            <a id="detail-back" href="#portfolio"><span aria-hidden="true">&larr;</span> <span data-i18n="detail_back">Back</span></a>
+            <section id="research-detail" class="portfolio-band" tabindex="-1" hidden></section>
+        </div>
+    </div>
 
     <!-- QR Full Screen Modal -->
     <div id="qr-modal" class="qr-modal">
@@ -493,7 +587,9 @@
         <p class="text-dark-gray text-xs font-light tracking-wide">&copy; 2026 HEISEI DESIGN. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="portfolio-translations.js?v=20261011"></script>
+    <script src="portfolio-gallery.js?v=20261011"></script>
+    <script src="script.js?v=20261011"></script>
 </body>
 
 </html>

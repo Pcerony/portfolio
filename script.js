@@ -186,6 +186,12 @@ const translations = {
     }
 };
 
+if (typeof portfolioTranslations !== 'undefined') {
+    Object.keys(portfolioTranslations).forEach(lang => {
+        Object.assign(translations[lang], portfolioTranslations[lang]);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Language Switcher Logic
@@ -218,6 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update document lang
         document.documentElement.lang = lang;
+        setTimeout(() => window.dispatchEvent(new Event('portfolio:change')), 220);
     }
 
     // Setup transition for smooth language changing
@@ -441,8 +448,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const workItems = document.querySelectorAll('.work-item');
         workItems.forEach(item => {
+            if (item.closest('.portfolio-band')?.hidden) return;
             const track = item.querySelector('.work-images-scroll, .work-images-grid-scroll');
             if (!track) return;
+
+            // Touch screens retain the native horizontal track for direct swiping.
+            // Tall projects also stay unpinned so all captions remain reachable.
+            if (window.innerWidth <= 768 ||
+                (item.classList.contains('project-media') && item.offsetHeight > window.innerHeight - 80)) return;
 
             // Calculate scrollable difference
             let maxTranslate = track.scrollWidth - track.clientWidth;
@@ -480,6 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize after layout is settled
     setTimeout(setupScrollJacking, 300);
+    window.addEventListener('portfolio:change', setupScrollJacking);
 
     // De-bounce resize
     let resizeTimer;
