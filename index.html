@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>HEISEI'S PAGE</title>
-    <meta name="portfolio-version" content="20261011.4">
+    <meta name="portfolio-version" content="20261011.5">
     <!-- Favicon (Red Knot Logo) -->
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261011.4">
+    <link rel="stylesheet" href="style.css?v=20261011.5">
 </head>
 
 <body class="light-mode">
@@ -198,6 +198,14 @@
             <div class="container">
                 <p class="section-label text-dark-gray mb-8" data-i18n="portfolio_title">Design Works</p>
                 <div class="category-cover-grid">
+                    <a id="cover-concept" class="category-cover" href="#works-concept">
+                        <img src="./images/work1/01.png" alt="OVO AI hardware design" loading="lazy">
+                        <span data-i18n="category_concept">Concept Design</span>
+                    </a>
+                    <a id="cover-everyday" class="category-cover" href="#works-everyday">
+                        <img src="./images/practice/montage-review.png" alt="AI montage workbench storyboard review" loading="lazy">
+                        <span data-i18n="category_everyday">Design Practice</span>
+                    </a>
                     <a id="cover-lab" class="category-cover" href="#works-lab">
                         <img src="./images/lab/logo.png" alt="SoDesLab logo" class="lab-logo-cover" loading="lazy">
                         <span data-i18n="category_lab">SodesLab</span>
@@ -207,14 +215,6 @@
                         <img src="./images/aws/shirt-front.jpg" alt="UG community T-shirt" loading="lazy">
                         <span data-i18n="category_aws">Amazon Web Service User Group</span>
                         <small data-i18n="category_aws_sub">Merchandise Development</small>
-                    </a>
-                    <a id="cover-everyday" class="category-cover" href="#works-everyday">
-                        <img src="./images/other/01.png" alt="Design archive cover" loading="lazy">
-                        <span data-i18n="category_everyday">Design Practice</span>
-                    </a>
-                    <a id="cover-concept" class="category-cover" href="#works-concept">
-                        <img src="./images/work1/01.png" alt="OVO AI hardware design" loading="lazy">
-                        <span data-i18n="category_concept">Concept Design</span>
                     </a>
                 </div>
 
@@ -249,7 +249,8 @@
 </article>
 <article class="work-item project-media" data-lab-project="operations">
 <div class="work-images-scroll"><div class="work-image"><img src="./images/lab/plog-wall.jpg" alt="Lab P-log shared photo and diary wall" loading="lazy" decoding="async"></div>
-<div class="work-image"><img src="./images/lab/plog-story.jpg" alt="Loaded diary article by Heisei" loading="lazy" decoding="async"></div></div>
+<div class="work-image"><img src="./images/lab/plog-story.jpg" alt="Loaded diary article by Heisei" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/taki/page-07.jpg" alt="TAKI portfolio page explaining P-log and three publishing workflow phases" loading="lazy" decoding="async"></div></div>
 <div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="lab_ops_title">SoDesLab | Lab P-log</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="lab_ops_sub">WEBSITE OPERATIONS / AUTOMATED PUBLISHING</p><p class="text-gray text-sm mt-2" data-i18n="lab_ops_desc">A shared photo wall where lab members pair their photographs with diary-style stories. Photo cards lead to the full article, bringing individual experiences into the lab's collective record.</p></div><p class="text-gray text-sm mt-2" data-i18n="lab_ops_flow">Members write in Google Docs. A local AI workflow checks for updates on a schedule, downloads and parses articles, identifies authors and dates, uploads media and content to the server, and updates the website in chronological order.</p>
 </article>
 <article class="work-item project-media" data-lab-project="shirts">
@@ -266,6 +267,27 @@
                 <section id="works-everyday" class="portfolio-band" aria-labelledby="cover-everyday" tabindex="-1" hidden>
 <h2 class="portfolio-band-title text-white" data-i18n="category_everyday">Design Practice</h2>
 <div class="portfolio-grid">
+<article class="work-item project-media" data-practice-project="montage">
+<div class="work-images-scroll"><div class="work-image"><img src="./images/practice/montage-review.png" alt="AI montage storyboard analysis and human review interface" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/practice/montage-story.png" alt="Reordered movie narrative and export interface" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="practice_montage_title">AI Montage Workbench</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="practice_montage_sub">UI / UX / AI WORKFLOW</p><p class="text-gray text-sm mt-2" data-i18n="practice_montage_desc">A film workbench combining AI shot analysis with human review. Confirm story facts and shots, group and reorder them, then compare narrative alternatives while preserving the original facts and ending.</p></div>
+</article>
+<article class="work-item project-media" data-practice-project="amino-ar">
+<div class="work-images-scroll"><div class="work-image"><img src="./images/practice/amino-home.jpg" alt="Amino acid AR teaching tool home screen" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/practice/amino-atlas.jpg" alt="Amino acid atlas connecting physical teaching cards to molecular structures" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="practice_amino_title">Amino Atlas | Flower-ball AR</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="practice_amino_sub">UI / UX / INTERACTIVE LEARNING</p><p class="text-gray text-sm mt-2" data-i18n="practice_amino_desc">A science-museum learning prototype connecting flower-ball teaching models with 20 amino acids. Camera recognition, molecular views and a fortune mini-game link physical exploration with a mobile interface.</p></div>
+<a href="https://pcerony.github.io/amino-acid-ar-teaching-tool/" target="_blank" rel="noopener noreferrer" class="lab-project-link text-white" data-i18n="practice_prototype_link">Open Prototype</a>
+</article>
+<article class="work-item project-media" data-practice-project="moving-memories">
+<div class="work-images-scroll"><div class="work-image"><img src="./images/practice/moving-memories-board.png" alt="Moving Memories service concept, asymmetric co-play and service blueprint" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/practice/moving-memories-home.png" alt="Moving Memories youth participant mobile interface" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="practice_memories_title">Moving Memories</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="practice_memories_sub">SERVICE DESIGN / MOBILE UX / TANGIBLE INTERACTION</p><p class="text-gray text-sm mt-2" data-i18n="practice_memories_desc">A collaborative service-design project for intergenerational exploration in Ohori Park. Older participants guide the route with a paper map; young volunteers use a mobile app, NFC necklaces and star badges to discover and complete shared activities. Shown here: service blueprint and mobile prototype.</p></div>
+</article>
+<article class="work-item project-media" data-practice-project="business-card">
+<div class="work-images-scroll"><div class="work-image"><img src="./images/practice/business-card.jpg" alt="First-generation 3D printed personal business card with embedded NFC tag" loading="lazy" decoding="async"></div>
+<div class="work-image"><img src="./images/practice/business-card-nfc.jpg" alt="Phone touching the NFC business card to open the personal website" loading="lazy" decoding="async"></div></div>
+<div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="practice_card_title">First-generation NFC Business Card</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="practice_card_sub">PRODUCT DESIGN / PHYSICAL-DIGITAL INTERACTION</p><p class="text-gray text-sm mt-2" data-i18n="practice_card_desc">A 3D printed personal business card with an embedded NFC tag. Touching it with a compatible phone opens the personal website. Original card and interaction photographs from the TAKI portfolio.</p></div>
+</article>
 <article class="work-item project-media" data-practice-project="dredger">
 <div class="work-image-single"><div class="work-image"><img src="./images/other/01.png" alt="MUSH 3D printed dredger form and structure validation model" loading="lazy" decoding="async"></div></div>
 <div class="work-info mt-4"><h3 class="font-medium text-white text-lg" data-i18n="practice_dredger_title">MUSH | Dredger Validation Model</h3><p class="text-xs text-dark-gray mt-1 mb-2" data-i18n="practice_model_sub">PHYSICAL PROTOTYPE / DESIGN VALIDATION</p><p class="text-gray text-sm mt-2" data-i18n="practice_dredger_desc">A 3D printed physical model of the concept dredger, used to validate its form and structural relationships.</p></div>
@@ -587,9 +609,9 @@
         <p class="text-dark-gray text-xs font-light tracking-wide">&copy; 2026 HEISEI DESIGN. All rights reserved.</p>
     </footer>
 
-    <script src="portfolio-translations.js?v=20261011.4"></script>
-    <script src="portfolio-gallery.js?v=20261011.4"></script>
-    <script src="script.js?v=20261011.4"></script>
+    <script src="portfolio-translations.js?v=20261011.5"></script>
+    <script src="portfolio-gallery.js?v=20261011.5"></script>
+    <script src="script.js?v=20261011.5"></script>
 </body>
 
 </html>

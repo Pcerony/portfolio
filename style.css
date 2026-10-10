@@ -6,6 +6,7 @@
 :root {
   /* Strictly Monochrome Color Palette */
   --color-bg: #000000;
+  --project-image-bg: #000000;
   --color-white: #ffffff;
   --color-light-gray: #cccccc;
   --color-gray: #888888;
@@ -19,6 +20,7 @@
 }
 
 body.light-mode {
+  --project-image-bg: #ffffff;
   --color-bg: #EAEAEA;
   --color-white: #111111;
   --color-light-gray: #444444;
@@ -911,7 +913,7 @@ body.project-dialog-open {
 .project-media .work-image {
   aspect-ratio: auto;
   height: min(56vh, 620px);
-  background: #f7f7f7;
+    background: var(--project-image-bg);
 }
 
 .project-media .work-image img {
@@ -937,7 +939,7 @@ body.project-dialog-open {
 .category-cover img.lab-logo-cover {
   object-fit: contain;
   padding: 12%;
-  background: #f7f7f7;
+    background: var(--project-image-bg);
 }
 
 @media (min-width: 769px) {
