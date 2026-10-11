@@ -921,6 +921,17 @@ body.project-dialog-open {
   object-fit: contain;
 }
 
+.project-media .phone-gallery .work-image {
+  flex: 0 0 auto;
+  width: min(240px, calc(62svh * 390 / 844));
+  height: auto;
+  aspect-ratio: 390 / 844;
+}
+
+.project-media .project-documents {
+  margin-top: 2rem;
+}
+
 .project-media .work-image-single .work-image {
   width: 100%;
 }
